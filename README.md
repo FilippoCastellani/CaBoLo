@@ -1,8 +1,8 @@
- 
 
 # What is it ?
 
-This is a project concerning the use of [[Machine Learning]]  in the context of Atrial Fibrillation detection.
+This is a project concerning the use of Machine Learning in the context of Atrial Fibrillation detection.
+CIAOOOOOOOOOOOOOOOOOOOOOO
 
 ## The purpose
 
