@@ -1,6 +1,4 @@
-#Project
-
-  
+ 
 
 # What is it ?
 
@@ -13,14 +11,12 @@ The team purpose was to reproduce the results obtained by a group of researchers
 # Bibliography
 
 [Detection of Atrial Fibrillation Using Decision Tree Ensemble Guangyu](https://www.cinc.org/archives/2017/pdf/342-204.pdf)
+
 _Bin , Minggang Shao, Guanghong Bin, Jiao Huang, Dingchang Zheng , Shuicai Wu_
 
 # Context
+Project developed @ Polimi.
 
 ### Who is working on it ?
 
-[[Filippo Castellani]]
-
-[[Chiara Boscarino]]
-
-[[Antonella Lombardi]]
+Filippo Castellani , Chiara Boscarino , Antonella Lombardi.
