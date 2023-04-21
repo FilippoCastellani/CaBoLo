@@ -4,22 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "6fa8e1e2236777d1",
+        "id": "cf399231392dbb78",
         "type": "tabs",
         "children": [
           {
-            "id": "a733040009faed82",
+            "id": "7148fab41c96d486",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Index for Arrhythmia.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "07b812bf04e33801",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Similarity Indexes Between Beats.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -69,7 +82,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "75e4f59f7ef21ce6",
@@ -85,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Similarity Indexes Between Beats.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Similarity Indexes Between Beats.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Similarity Indexes Between Beats.md"
               }
             }
           }
@@ -133,7 +147,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -145,10 +160,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a733040009faed82",
+  "active": "07b812bf04e33801",
   "lastOpenFiles": [
+    "Index for Arrhythmia.md",
+    "Similarity Indexes Between Beats.md",
+    "README.md",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230421180235.png",
+    "Median RR Interval.md",
     "TEORIA_appunti.pdf",
-    "NotePersonaliFilippo/2017 PhysioNet CinC Challenge.md",
-    "README.md"
+    "NotePersonaliFilippo/2017 PhysioNet CinC Challenge.md"
   ]
 }
