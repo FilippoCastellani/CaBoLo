@@ -44,21 +44,28 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 			 - [ ] R Amplitude
 			 - [ ] S Amplitude
 			 - [ ] T Ampliture
+				 - [ ] DOUBT: ma per ognuna di queste forse dovremmo calcolare media e varianza/standard deviation ? (seull'articolo ci sono due feature per ognuno di questi)
 		 - [ ] AF Features
 			 - [x] [[AFEv]] 
 				 - [ ] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?
 			 - [x] Radius [[AFEv#Radius sub-feature]]
 			 - [x] [[Shannon Entropy]] 
-			 - [ ] [[Kolmogorov-Smirnov Test Value]]
+				 - [ ] Doubt: vedi nota
+			 - [x] [[Kolmogorov-Smirnov Test Value]]
+				 - [ ] Doubt: vedi nota
 		 - [ ] RR intervals Features
 			 - [x] Median RR Interval
 			 - [x] [[Index for Arrhythmia]]
 				 - [ ] DOUBT: vedi all'interno della nota
 		 - [ ] [[Similarity Indexes Between Beats|Similarity index between beats Features]]
 			 - [x] [[Similarity Indexes Between Beats#Similarity index of QRS (F40)|Similarity index of QRS]]
+				 - [ ] DOUBT: vedi all'interno della nota
 			 - [x] [[Similarity Indexes Between Beats#Similarity index of R amplitude (F41)|Similarity index of R amplitude]]
+				 - [ ] DOUBT: vedi all'interno della nota
 			 - [ ] Ratio of high similarity beats
+				 - [ ] DOUBT: vedi all'interno della nota
 			 - [ ] Signal Qualify index
+				 - [ ] DOUBT: vedi all'interno della nota
  - [ ] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
  - [ ] Realizzazione della funzione che mette in pratica la pipeline
  - [ ] Costituzione di una matrice che divenga il dataset per il training del modello

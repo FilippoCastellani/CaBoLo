@@ -19,6 +19,7 @@ where 
 
 > [!Warning] Doubts: 
 >  - How can you define $N_{outliers}$ ?
+>- #TO_UNDERSTAND 
 
 
 

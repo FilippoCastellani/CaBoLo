@@ -18,18 +18,6 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "37937979cab78044",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Similarity Indexes Between Beats.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
         ]
       }
@@ -60,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#TO_UNDERSTAND",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -77,11 +65,13 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "75e4f59f7ef21ce6",
@@ -160,14 +150,15 @@
   },
   "active": "adb213f065f4c518",
   "lastOpenFiles": [
-    "Similarity Indexes Between Beats.md",
+    "NotePersonaliFilippo/Features/Similarity Indexes Between Beats.md",
     "README.md",
-    "Index for Arrhythmia.md",
-    "Kolmogorov-Smirnov Test Value.md",
+    "NotePersonaliFilippo/Features/Shannon Entropy.md",
+    "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+    "NotePersonaliFilippo/Features/AFEv.md",
+    "NotePersonaliFilippo/Features",
+    "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420185519.png",
-    "Shannon Entropy.md",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420181933.png",
-    "AFEv.md",
     "NotePersonaliFilippo/2017 PhysioNet CinC Challenge.md",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162620.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162754.png",

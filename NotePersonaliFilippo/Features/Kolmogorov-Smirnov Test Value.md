@@ -19,4 +19,4 @@ RIMANE SOLO DA CORREGGERE
 
 > [!Warning] 
 > COME FACCIAMO con la distribuzione AF ce la inventiamo ?
-> 
+> #TO_UNDERSTAND 
