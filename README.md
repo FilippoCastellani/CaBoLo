@@ -26,9 +26,12 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 		 - [ ] Removal of pneumonic induced noise and muscular activity
 			 - [ ] Ipotesi: probabilmente si tratta della baseline correction (fatta con movmean)
 		 - [ ] Filtering in physiological band
-			 - [ ] Ipotesi: probabilmente (0.4-60 Hz) (0.5 -50 Hz)
-		 - [ ] Baseline Correction (*movmean removal*)
-			 - [ ] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing #TO_UNDERSTAND 
+			 - [ ] Ipotesi: probabilmente (2-50 Hz)
+				 - [ ] Stiamo tranquilli per la muscular noise e anche per il power line noise
+				 - [ ] Perche Butterworh e di che ordine ? 
+				 - [ ] Ce ne freghiamo della fase non lineare e facciamo filt filt !
+		 - [x] Baseline Correction (*movmean removal*)
+			 - [x] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing (CONFERMATO)
 	 - [ ] Feature Extraction
 		 - [ ] Morphological Feature
 			 - [ ] QRS Duration (Onset-Offset)
@@ -42,17 +45,18 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 			 - [ ] S Amplitude
 			 - [ ] T Ampliture
 		 - [ ] AF Features
-			 - [ ] AFEv
-			 - [ ] Shannon Entropy
-			 - [ ] Radius
-			 - [ ] Kolmogorov-Smirnov Test Value
+			 - [x] [[AFEv]] 
+				 - [ ] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?
+			 - [x] Radius [[AFEv#Radius sub-feature]]
+			 - [x] [[Shannon Entropy]] 
+			 - [ ] [[Kolmogorov-Smirnov Test Value]]
 		 - [ ] RR intervals Features
 			 - [ ] Median RR Interval
 			 - [ ] Index for Arrhythmia
 		 - [ ] Similarity index between beats Features
 			 - [ ] Similarity index of QRS
 			 - [ ] Similarity index of R amplitude
-			 - [ ] Ration of high similarity beats
+			 - [ ] Ratio of high similarity beats
 			 - [ ] Signal Qualify index
  - [ ] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
  - [ ] Realizzazione della funzione che mette in pratica la pipeline

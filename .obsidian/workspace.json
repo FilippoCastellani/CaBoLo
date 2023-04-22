@@ -4,23 +4,29 @@
     "type": "split",
     "children": [
       {
-        "id": "cf399231392dbb78",
+        "id": "4e24e22689e2d110",
         "type": "tabs",
         "children": [
           {
-            "id": "7148fab41c96d486",
+            "id": "f76517f566b7cf6d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Index for Arrhythmia.md",
+                "file": "Kolmogorov-Smirnov Test Value.md",
                 "mode": "source",
                 "source": false
               }
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "bd1ae374c704ef02",
+        "type": "tabs",
+        "children": [
           {
-            "id": "07b812bf04e33801",
+            "id": "b1e90bd9d254eba1",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -160,14 +166,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "07b812bf04e33801",
+  "active": "b1e90bd9d254eba1",
   "lastOpenFiles": [
-    "Index for Arrhythmia.md",
-    "Similarity Indexes Between Beats.md",
+    "Kolmogorov-Smirnov Test Value.md",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420185519.png",
+    "Shannon Entropy.md",
     "README.md",
-    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230421180235.png",
-    "Median RR Interval.md",
-    "TEORIA_appunti.pdf",
-    "NotePersonaliFilippo/2017 PhysioNet CinC Challenge.md"
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420181933.png",
+    "AFEv.md",
+    "NotePersonaliFilippo/2017 PhysioNet CinC Challenge.md",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162620.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162754.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420155929.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420155637.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230419110839.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230419105549.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230419094805.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230322141326.png",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Articles/Detection of Atrial Fibrillation using Decision Tree Ensamble.pdf",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Articles/Automatic Real Time Detection of Atrial Fibrillation.pdf",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Articles/A_Detector_for_a_Chronic_Implantable_Atrial_Tachyarrhythmia_Monitor.pdf",
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Articles",
+    "TEORIA_appunti.pdf"
   ]
 }
