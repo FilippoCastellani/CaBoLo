@@ -27,8 +27,8 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 			 - [ ] Ipotesi: probabilmente si tratta della baseline correction (fatta con movmean)
 		 - [ ] Filtering in physiological band
 			 - [ ] Ipotesi: probabilmente (2-50 Hz)
-				 - [ ] Stiamo tranquilli per la muscular noise e anche per il power line noise
-				 - [ ] Perche Butterworh e di che ordine ? 
+				 - [x] Stiamo tranquilli per la muscular noise e anche per il power line noise
+				 - [x] Perche Butterworh e di che ordine ? 
 				 - [ ] Ce ne freghiamo della fase non lineare e facciamo filt filt !
 		 - [x] Baseline Correction (*movmean removal*)
 			 - [x] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing (CONFERMATO)
@@ -51,11 +51,12 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 			 - [x] [[Shannon Entropy]] 
 			 - [ ] [[Kolmogorov-Smirnov Test Value]]
 		 - [ ] RR intervals Features
-			 - [ ] Median RR Interval
-			 - [ ] Index for Arrhythmia
-		 - [ ] Similarity index between beats Features
-			 - [ ] Similarity index of QRS
-			 - [ ] Similarity index of R amplitude
+			 - [x] Median RR Interval
+			 - [x] [[Index for Arrhythmia]]
+				 - [ ] DOUBT: vedi all'interno della nota
+		 - [ ] [[Similarity Indexes Between Beats|Similarity index between beats Features]]
+			 - [x] [[Similarity Indexes Between Beats#Similarity index of QRS (F40)|Similarity index of QRS]]
+			 - [x] [[Similarity Indexes Between Beats#Similarity index of R amplitude (F41)|Similarity index of R amplitude]]
 			 - [ ] Ratio of high similarity beats
 			 - [ ] Signal Qualify index
  - [ ] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"

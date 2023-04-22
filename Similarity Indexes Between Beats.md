@@ -1,5 +1,5 @@
 
-## Similarity index of QRS (F40):
+## Similarity index of QRS (F40)
 For the similarity index of QRS, QRS onsets and offsets were used in order to extract the QRS complex waves from the signal.
 Then, cross-correlation between two successive QRSs was computed, we extracted the maximum correlation value for each of the QRS pairs, and we obtained a vector containing these values. 
 Finally, by computing the mean of this vector, we obtained the mean value of all the maxima. 
@@ -8,7 +8,7 @@ This value is considered the Similarity index for QRS pulses.
 > [!Important] Personal opinion
 > Before cross-correlation i would do signal normalization
 
-## Similarity index of R amplitude (F41):
+## Similarity index of R amplitude (F41)
 Like similarity index of QRS, we computed the similarity index of R amplitude from the correlation between consecutive R amplitudes. As for the QRS, we extracted the maximum correlation value for each of the R amplitude pairs, and then we computed the mean, obtaining the R amplitude similarity index.
 
 
