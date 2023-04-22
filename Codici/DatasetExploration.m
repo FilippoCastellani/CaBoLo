@@ -1,4 +1,3 @@
-% FC THIS IS THE MAIN BRANCH
 % Dataset Exploration
 
 % ECG recordings, collected using the AliveCor device.
@@ -15,9 +14,20 @@
 % - A00002 
 % ...
 
+clear all;
+
 %% Set working path
     if(getenv('COMPUTERNAME')=="FILIPPO") % se sei sul computer di filippo
-        cd("E:\DrivePolimi\OneDrive - Politecnico di Milano\MasterSubjects\Biomedical Signal Processing LAB\2022\Progetto\Codici\DatasetOriginale\training2017");
+        PROJECT_DIRECTORY = 'E:/ProgettiGithub/CaBoLo/Codici/';
+        cd(PROJECT_DIRECTORY);
+        
+        % add WFDB toolbox to search path
+        addpath(genpath("E:/ProgettiGithub/CaBoLo/Codici/WFDB_Toolbox"));
+        
+        % identify Dataset folder within project directory
+        DatasetFolderPrefix = 'Dataset/training2017/';
+        DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+        
     else 
         %DatasetPath = "default"; %put your path here;
     end
@@ -27,17 +37,12 @@
 % Let's pick the first patient
 SelectedPatient='A00001';
 
-% Let's load patient's informations
-[signal, sampling_frequency, time_axis] = Load_Patient(SelectedPatient);
+SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
+%% Reading selected patient infos
+
+% Let's load patient's informations
+[signal, sampling_frequency, time_axis] = Load_Patient(SelectedPatientPath);
 
 % Let's plot patient's signal
 plot(time_axis,signal)
-
-
-
-function [Sig, Fs, Time] = Load_Patient(PatientName)
-    %PatientPath = fullfile("training2017",PatientName);
-    [Sig, Fs, Time] = rdsamp(PatientName, 1);
-    
-end
