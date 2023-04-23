@@ -23,7 +23,7 @@ clear all;
         DatasetFolderPrefix = 'Dataset/training2017/';
         DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
       
-    elseif(getenv('COMPUTERNAME')=="") % Computer Nelly
+    else if(getenv('COMPUTERNAME')=='')
          PROJECT_DIRECTORY = '/Users/antonellalombardi/Documents/GitHub/CaBoLo/Codici/';
          cd(PROJECT_DIRECTORY);
 
@@ -33,7 +33,7 @@ clear all;
          DatasetFolderPrefix = 'Dataset/training2017/';
          DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
         
-    %else 
+    else 
         %DatasetPath = "default"; %put your path here;
         % path: "C:\Users\c.boscarino\OneDrive - Reply\Desktop\ChiaraBoscarino\UNI\BSPLab\Project\training2017"
 
