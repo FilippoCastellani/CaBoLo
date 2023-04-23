@@ -1,8 +1,31 @@
-function features = feature_extraction(ecg, fs, t, visuals)
+function features = feature_extraction(recordName,ecg, fs, t, visuals)
 
     % R peaks detection
     [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
+    
+    % Generate an annotation file containing the R peaks locations
+    wrann(recordName,'Rpeaks',Rpeak_index,'N',[0],[0],[0],{''})
+
+    % Convert R peaks sample indices in time values
     Rpeak_instant = Rpeak_index/fs;
+
+    % ECGPUWAVE tools
+    % generate annotations using ECGPUWAVE tool
+    ecgpuwave(recordName,'annotations',[],[],'Rpeaks');
+    % retrieve P waves
+    pwaves=rdann(recordName,'annotations',[],[],[],'p');
+    % retrieve T waves
+    twaves=rdann(recordName,'annotations',[],[],[],'t');
+    % retrieve others ...
+    % TODO: RETRIEVAL DI TUTTO IL NECESSARIO
+
+    if visuals
+        figure;
+        hold on;grid on
+        plot(t,ecg);
+        plot(t(pwaves),ecg(pwaves),'or')
+        plot(t(twaves),ecg(twaves),'*g')
+    end
 
     if visuals
         figure; tlim = [0 10]; amplim= [-1 2];
