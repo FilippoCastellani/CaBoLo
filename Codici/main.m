@@ -4,7 +4,7 @@
 %% Clearing previous data and closing all the windows if any
 
 clc;close all;
-clear all;
+clear;
 
 %% Setting the environment
 
@@ -53,8 +53,12 @@ SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
 %% Filtering
 ecg = signal;
-verbose= 1; 
+verbose= 1;
 
-ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);            % (1) Preprocessing 
-features = feature_extraction(ecg_cleaned, Fs, time_axis, verbose);  % (2) Feature vector extraction on the processed signal
+ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);                               % (1) Preprocessing 
+features = feature_extraction(SelectedPatientPath,ecg_cleaned, Fs, time_axis, verbose);     % (2) Feature vector extraction on the processed signal
 
+%%
+% may be usefull to check results:
+% 
+%wfdbRecordViewer
