@@ -25,10 +25,13 @@ function features = feature_extraction(recordName,ecg, fs, t, visuals)
     % retrieve offsets
     [offset_ann_index,~,~,~,offset_ann_num,~]=rdann(recordName,'annotations',[],[],[],')');
     
-    % Compute QRS duration as the difference between onset and offset in
-    % seconds
+    % Onset QRS
     QRS_onset = onset_ann_index(onset_ann_num==1);
+    
+    % Offset QRS
     QRS_offset = offset_ann_index(offset_ann_num==1);
+
+    % Compute QRS duration
     QRS_duration = (QRS_offset - QRS_onset)/fs;
     
     if visuals

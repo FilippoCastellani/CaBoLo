@@ -22,6 +22,20 @@ clear;
         % identify Dataset folder within project directory
         DatasetFolderPrefix = 'Dataset/training2017/';
         DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+    
+    elseif(getenv('COMPUTERNAME')=="DESKTOP-T9UVACS")
+        PROJECT_DIRECTORY = 'C:/Users/Filippo/Documents/GitHub/CaBoLo/Codici';
+        cd(PROJECT_DIRECTORY);
+        
+        % add WFDB toolbox to search path
+        addpath(genpath("C:/Users/Filippo/Documents/GitHub/CaBoLo/Codici/WFDB_Toolbox"));
+
+        % add functions folder to search path
+        addpath(genpath("C:/Users/Filippo/Documents/GitHub/CaBoLo/Codici/Functions"));
+         
+        DatasetFolderPrefix = 'Dataset/training2017/';
+        DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+        
       
     elseif(getenv('COMPUTERNAME')=="") % Computer Nelly
          PROJECT_DIRECTORY = '/Users/antonellalombardi/Documents/GitHub/CaBoLo/Codici/';
@@ -66,12 +80,15 @@ SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
 %% Filtering
 ecg = signal;
-verbose= 1;
+verbose= 0;
 
 ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);                               % (1) Preprocessing 
 features = feature_extraction(SelectedPatientPath,ecg_cleaned, Fs, time_axis, verbose);     % (2) Feature vector extraction on the processed signal
 
 %%
+
+%ecgpuwave
+
 % may be usefull to check results:
 % 
-%wfdbRecordViewer
+wfdbRecordViewer
