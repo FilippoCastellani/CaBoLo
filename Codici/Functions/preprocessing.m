@@ -1,6 +1,14 @@
 %% Preprocessing
 
-function clean_ecg = preprocessing(ecg, fs, t, visuals)
+function [y,b,a] = preprocessing(ecg, fs, t, visuals)
+    % This function filters the signal using a bandpass filter
+    % Input: ecg: the signal to be filtered
+    %        fs: the sampling frequency
+    %        t: the time vector of the signal to be filtered
+    %        visuals: a flag defining whether to provide plots  or not
+    % Output: y: the filtered signal
+    %         b: the numerator coefficients of the filter
+    %         a: the denominator coefficients of the filter
 
     fn = fs/2;
     n= 3;                %filter order
@@ -11,7 +19,7 @@ function clean_ecg = preprocessing(ecg, fs, t, visuals)
     [b,a] = butter(n,Wn,'bandpass');
     bpfecg = filtfilt(b,a,ecg)'; %bandpass filtered ecg
 
-    clean_ecg = bpfecg;
+    y = bpfecg;
     
     % visuals
     if (visuals)
