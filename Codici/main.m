@@ -32,10 +32,23 @@ clear;
          
          DatasetFolderPrefix = 'Dataset/training2017/';
          DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+    
+    elseif(getenv('COMPUTERNAME')=="HEAL26821") % Computer Bosca
+        PROJECT_DIRECTORY = 'C:/Users/c.boscarino/OneDrive - Reply/Desktop/ChiaraBoscarino/UNI/BSPLab/CaBoLo/Codici/';
+        cd(PROJECT_DIRECTORY);
         
+        % add WFDB toolbox to search path
+        addpath(genpath("C:/Users/c.boscarino/OneDrive - Reply/Desktop/ChiaraBoscarino/UNI/BSPLab/CaBoLo/Codici/WFDB_Toolbox"));
+
+        % add functions folder to search path
+        addpath(genpath("C:/Users/c.boscarino/OneDrive - Reply/Desktop/ChiaraBoscarino/UNI/BSPLab/CaBoLo/Codici/Functions"));
+        
+        % identify Dataset folder within project directory
+        DatasetFolderPrefix = 'Dataset/training2017/';
+        DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+
     %else 
         %DatasetPath = "default"; %put your path here;
-        % path: "C:\Users\c.boscarino\OneDrive - Reply\Desktop\ChiaraBoscarino\UNI\BSPLab\Project\training2017"
 
     end
 
