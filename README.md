@@ -33,18 +33,19 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 		 - [x] Baseline Correction (*movmean removal*)
 			 - [x] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing (CONFERMATO)
 	 - [ ] Feature Extraction
-		 - [ ] Morphological Feature
-			 - [ ] QRS Duration (Onset-Offset)
+		 - [ ] Morphological Feature ( * ) = implented on [[ECGPUWAVE Note]]
+			 - [ ] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
+			 - [ ] ( * ) QRS Duration (Onset-Offset) 
 			 - [ ] PR Interval
 			 - [ ] QT Interval
 			 - [ ] QS Interval
 			 - [ ] ST Interval
-			 - [ ] P Amplitude
-			 - [ ] Q Amplitude
+			 - [ ] ( * ) P Amplitude
+			 - [ ] ( * ) Q Amplitude
 			 - [ ] R Amplitude
 			 - [ ] S Amplitude
 			 - [ ] T Ampliture
-				 - [ ] DOUBT: ma per ognuna di queste forse dovremmo calcolare media e varianza/standard deviation ? (seull'articolo ci sono due feature per ognuno di questi)
+				 - [ ] DOUBT: ma per ognuna di queste forse dovremmo calcolare media e varianza/standard deviation ?
 		 - [ ] AF Features
 			 - [x] [[AFEv]] 
 				 - [ ] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?
@@ -70,7 +71,7 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
  - [ ] Realizzazione della funzione che mette in pratica la pipeline
  - [ ] Costituzione di una matrice che divenga il dataset per il training del modello
 
-![[Pasted image 20230419094805.png|330]] ![[Pasted image 20230419105549.png|330]]
+![[Pasted image 20230419094805.png|300]] ![[Pasted image 20230419105549.png|300]]
 ## Pt. 2 Schedule
 
 - [ ] Separazione del training set in 3: Training, Validation e Test
