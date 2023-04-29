@@ -68,7 +68,7 @@ clear;
 
 %% Loading data
 % Let's pick a patient
-SelectedPatient='A00001';
+SelectedPatient='A00004';
 
 SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 

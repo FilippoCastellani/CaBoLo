@@ -1,5 +1,18 @@
 function features = feature_extraction(recordName,ecg, fs, t, visuals)
-
+    
+    %% MORPHOLOGICAL FEATURES
+    % compute the following features
+    %   - [X] QRS Duration (Onset-Offset) FEATURE 1
+	%	- [X] PR Interval                 FEATURE 2
+	%	- [X] QT Interval                 FEATURE 3
+	%	- [?] QS Interval                 FEATURE 4
+	%	- [X] ST Interval                 FEATURE 5
+	%	- [ ] P Amplitude                 FEATURE 6
+	%	- [ ] Q Amplitude
+	%	- [ ] R Amplitude
+	%	- [ ] S Amplitude
+	%	- [ ] T Amplitude
+    
     % R peaks detection
     [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
     
@@ -25,12 +38,39 @@ function features = feature_extraction(recordName,ecg, fs, t, visuals)
     % retrieve offsets
     [offset_ann_index,~,~,~,offset_ann_num,~]=rdann(recordName,'annotations',[],[],[],')');
     
-    % Compute QRS duration as the difference between onset and offset in
-    % seconds
-    QRS_onset = onset_ann_index(onset_ann_num==1);
-    QRS_offset = offset_ann_index(offset_ann_num==1);
-    QRS_duration = (QRS_offset - QRS_onset)/fs;
+    % Compute QRS duration as the difference between onset and offset in seconds
+    QRS_onset = onset_ann_index(onset_ann_num==1);    % 1 is used for QRS
+    QRS_offset = offset_ann_index(offset_ann_num==1); % 1 is used for QRS
+    QRS_duration = (QRS_offset - QRS_onset)/fs;       % in order to have the duration in seconds
+
+    % Compute PR interval as the difference between onset of P wave and onset of QRS complex
+    P_onset = onset_ann_index(onset_ann_num==0);      % 0 is used for P waves
+    PR_duration = (QRS_onset - P_onset)/fs;           % in order to have the duration in seconds
+
+    % Compute QT interval as the difference between onset of QRS complex and offset of T wave
+    T_offset = offset_ann_index(offset_ann_num==2);   % 2 is used for T waves
+    QT_duration = (T_offset - QRS_onset)/fs;          % in order to have the duration in seconds
     
+    % Compute QS interval as the difference between Q peak and S peak indexes
+    % Compute Q and S fiducial points 
+    n = len(QRS_onset);
+    qwaves = nan(n);
+    swaves = nan(n);
+   
+    for i=(1:n)     % for each identified QRS complex
+        qr_signal = ecg(QRS_onset(i):Rpeak_index(i)); % get the QR segment
+        [~, Qloc_rel] = min(qr_signal); % find the negative peak 
+        qwaves(i) = Qloc_rel+QRS_onset(i); % store its location wrt the whole ecg
+
+        rs_signal = ecg(Rpeak_index(i):QRS_offset(i)); % get the RS segment
+        [~, Sloc_rel] = min(rs_signal); % find the negative peak 
+        swaves(i) = Sloc_rel+Rpeak_index(i); % store its location wrt the whole ecg
+    end
+    QS_interval = (swaves-qwaves)/fs;
+
+    % Compute ST interval as the difference between offset of QRS complex and offset of T wave
+    ST_duration = (T_offset - QRS_offset)/fs;         % in order to have the duration in seconds 
+
     if visuals
         figure;
         hold on;grid on
