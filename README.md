@@ -35,6 +35,7 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 	 - [ ] Feature Extraction
 		 - [ ] Morphological Feature ( * ) = implented on [[ECGPUWAVE Note]]
 			 - [ ] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
+			 - [ ] ![QRS1|300](https://upload.wikimedia.org/wikipedia/commons/9/9e/SinusRhythmLabels.svg)
 			 - [ ] ( * ) QRS Duration (Onset-Offset) 
 			 - [ ] PR Interval
 			 - [ ] QT Interval
@@ -44,8 +45,9 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 			 - [ ] ( * ) Q Amplitude
 			 - [ ] R Amplitude
 			 - [ ] S Amplitude
-			 - [ ] T Ampliture
+			 - [ ] T Amplitude
 				 - [ ] DOUBT: ma per ognuna di queste forse dovremmo calcolare media e varianza/standard deviation ?
+				 - [ ] ![QRS|400](https://litfl.com/wp-content/uploads/2018/10/ECG-waves-segments-and-intervals-LITFL-ECG-library-3.jpg.webp)
 		 - [ ] AF Features
 			 - [x] [[AFEv]] 
 				 - [ ] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?

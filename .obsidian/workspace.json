@@ -31,8 +31,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -100,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ECGPUWAVE Note.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ECGPUWAVE Note.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -140,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ECGPUWAVE Note.md"
+                "file": "README.md"
               }
             }
           }
@@ -161,20 +160,21 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9829ef49d25c7d50",
+  "active": "adb213f065f4c518",
   "lastOpenFiles": [
-    "README.md",
+    "Codici/Dataset/training2017/A00004.annotations",
+    "Codici/Dataset/training2017/A00004.Rpeaks",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.mat",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.trigger",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.hea-",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.hea",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.rec",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.edf",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.atr",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.dat",
+    "Codici/Dataset/training2017/A00002.annotations",
     "ECGPUWAVE Note.md",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.mat",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.trigger",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.hea-",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.hea",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.rec",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.edf",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.atr",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.dat",
-    "Codici/Functions/feature_extraction.asv",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00002.mat",
+    "README.md",
     "NotePersonaliFilippo/Features/Similarity Indexes Between Beats.md",
     "NotePersonaliFilippo/Features/Shannon Entropy.md",
     "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
