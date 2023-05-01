@@ -69,18 +69,26 @@ function [T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offs
         T_peak(i) = max_loc+QRS_offset(i); % store its location wrt the whole ecg
 
         % considering the slope in the T search window 
-        % and an empirical threshold of the mean slope 
-        emp_ptg = 0.20; 
-        slope_t_window = diff(t_window); 
-        thr = mean(abs(slope_t_window))*emp_ptg;
+        % and an empirical threshold of the mean slope
+        M = 7; % order of the lowpass filter
+        emp_ptg = 0.5; % (40%)
+        B = 1/M*ones(M,1);
+        filtered_t_window= filtfilt(B,1,t_window);
+        slope_t_window = diff(filtered_t_window); 
         
-        % compute the T onset as the first time the slope falls below the
-        % threshold going from the T peak  towards right
+        % onset
         slope_beforeT = slope_t_window(1:max_loc);
-        slope_afterT = slope_t_window(max_loc:end);
+        on_thr = mean(slope_beforeT)*emp_ptg;
+        on_loc = find_first_rise(slope_beforeT, on_thr);
+        T_onset(i) = on_loc+QRS_offset(i);
 
-        T_onset(i) = find_minmax_one(slope_beforeT>thr, 'min')+QRS_offset(i); 
-        T_offset(i) = find_minmax_one(slope_afterT>-thr, 'min')+T_peak(i);    
+        % offset
+        slope_afterT = slope_t_window(max_loc:end);
+        of_thr = mean(slope_afterT)*emp_ptg;
+        of_loc = find_first_rise(slope_afterT, of_thr);
+        T_offset(i) = of_loc+T_peak(i);   
+
+        % figure; hold on; plot(t_window); plot(filtered_t_window); plot(slope_t_window); yline(0); yline(on_thr); yline(of_thr); xline(on_loc); xline(of_loc+max_loc); hold off;
 
     end
 
