@@ -1,6 +1,5 @@
 function features = feature_extraction(recordName,ecg, fs, t, visuals)
     
-<<<<<<< Updated upstream
     % Features:
     % [ Morphological, AF_features, RR_features]
     % RR_features = median_RRinterval, ifa_index
@@ -12,30 +11,15 @@ function features = feature_extraction(recordName,ecg, fs, t, visuals)
 
     %% Morphological Features
 
-    %morphological_features  = get_morphological_features(recordName, ecg, fs, t, visuals, Rpeak_index);
+    morphological_feature_vector = get_morphological_features(ecg, fs, t, visuals, Rpeak_index);
     
     %% RR Features
 
-    [median_RRinterval, ifa_index] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
+    % [median_RRinterval, ifa_index] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
     
     %%
     %AF_features = get_AF_features(recordName, ecg, fs, t, visuals, Rpeak_index);
-    
-    %% Plots
-    if visuals>1
-        figure;
-        hold on;grid on
-        plot(t,ecg);
-%         plot(t(pwaves),ecg(pwaves),'or')
-%         plot(t(twaves),ecg(twaves),'*g')
-    end
-=======
-    morphological_feature_vector = get_morphological_features(recordName, ecg, fs, t, visuals, Rpeak_index);
 
-    %AF_features             = get_AF_features(recordName, ecg, fs, t, visuals, Rpeak_index);
-
-
->>>>>>> Stashed changes
 
     if visuals>1
         figure; tlim = [0 10]; amplim= [-1 2];

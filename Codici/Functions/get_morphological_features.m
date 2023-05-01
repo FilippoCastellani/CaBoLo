@@ -1,4 +1,4 @@
-function morphological_feature_vector = get_morphological_features(recordName, ecg, fs, t, visuals, Rpeak_index)
+function morphological_feature_vector = get_morphological_features(ecg, fs, t, visuals, Rpeak_index)
 
     %% MORPHOLOGICAL FEATURES
     % compute the following features
