@@ -16,20 +16,23 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 
  - [ ] Comprehension of features definition and meaning
 	 - [ ] Creation of a small word file with all the theory concerning the features and computation method of each of them
- - [ ] Dowload the dataset ( `training2017.zip` )
+ - [x] Dowload the dataset ( `training2017.zip` )
 	 - [ ] Capire come sono indicizzati i pazienti e quali sono le informazioni presenti per ognuno
-	 - [ ] Data exploration è stata già fatta da physionet quando ha pubblicato la challenge (vedi sopra Challenge Data)
+	 - [x] Data exploration è stata già fatta da physionet quando ha pubblicato la challenge (vedi sopra Challenge Data)
  - [ ] Definizione di una pipeline di processing che sia ad hoc per ogni paziente
 	 - [ ] Pre-processing:
 		 - [ ] Check for possible direction inversion of recording #TO_UNDERSTAND 
-		 - [ ] Electronic noise filtering #TO_UNDERSTAND 
+		 - [ ] Electronic noise filtering
+			 - [x] Noise was removed by low-pass filtering @ 50 Hz
+			 - [ ] Ma a che frequenza era davvero il noise ?
 		 - [ ] Removal of pneumonic induced noise and muscular activity
 			 - [ ] Ipotesi: probabilmente si tratta della baseline correction (fatta con movmean)
 		 - [ ] Filtering in physiological band
-			 - [ ] Ipotesi: probabilmente (2-50 Hz)
+			 - [x] Abbiamo deciso (2-50 Hz)
+				 - [ ] Ma quale reference citiamo che ha fatto la stessa cosa ?
 				 - [x] Stiamo tranquilli per la muscular noise e anche per il power line noise
 				 - [x] Perche Butterworh e di che ordine ? 
-				 - [ ] Ce ne freghiamo della fase non lineare e facciamo filt filt !
+				 - [x] Ce ne freghiamo della fase non lineare e facciamo filt filt !
 		 - [x] Baseline Correction (*movmean removal*)
 			 - [x] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing (CONFERMATO)
 	 - [ ] Feature Extraction
@@ -49,25 +52,25 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 				 - [ ] DOUBT: ma per ognuna di queste forse dovremmo calcolare media e varianza/standard deviation ?
 				 - [ ] ![QRS|400](https://litfl.com/wp-content/uploads/2018/10/ECG-waves-segments-and-intervals-LITFL-ECG-library-3.jpg.webp)
 		 - [ ] AF Features
-			 - [x] [[AFEv]] 
+			 - [ ] [[AFEv]] 
 				 - [ ] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?
-			 - [x] Radius [[AFEv#Radius sub-feature]]
-			 - [x] [[Shannon Entropy]] 
+			 - [ ] Radius [[AFEv#Radius sub-feature]]
+			 - [ ] [[Shannon Entropy]] 
 				 - [ ] Doubt: vedi nota
-			 - [x] [[Kolmogorov-Smirnov Test Value]]
+			 - [ ] [[Kolmogorov-Smirnov Test Value]]
 				 - [ ] Doubt: vedi nota
 		 - [ ] RR intervals Features
-			 - [x] Median RR Interval
-			 - [x] [[Index for Arrhythmia]]
+			 - [ ] Median RR Interval
+			 - [ ] [[Index for Arrhythmia]]
 				 - [ ] DOUBT: vedi all'interno della nota
 		 - [ ] [[Similarity Indexes Between Beats|Similarity index between beats Features]]
-			 - [x] [[Similarity Indexes Between Beats#Similarity index of QRS (F40)|Similarity index of QRS]]
+			 - [ ] [[Similarity Indexes Between Beats#Similarity index of QRS (F40)|Similarity index of QRS]]
 				 - [ ] DOUBT: vedi all'interno della nota
-			 - [x] [[Similarity Indexes Between Beats#Similarity index of R amplitude (F41)|Similarity index of R amplitude]]
+			 - [ ] [[Similarity Indexes Between Beats#Similarity index of R amplitude (F41)|Similarity index of R amplitude]]
 				 - [ ] DOUBT: vedi all'interno della nota
-			 - [ ] Ratio of high similarity beats
+			 - [ ] [[Similarity Indexes Between Beats#Ratio of high similarity beats (F42)|Ratio of high similarity beats]]
 				 - [ ] DOUBT: vedi all'interno della nota
-			 - [ ] Signal Qualify index
+			 - [ ] [[Similarity Indexes Between Beats#Signal Qualify index (F43)|Signal Qualify index]]
 				 - [ ] DOUBT: vedi all'interno della nota
  - [ ] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
  - [ ] Realizzazione della funzione che mette in pratica la pipeline
