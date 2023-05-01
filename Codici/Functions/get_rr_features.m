@@ -1,4 +1,4 @@
-function [median_RRinterval, ifa_index] = get_rr_features(fs, Rpeak_index)
+function [median_RRinterval, ifa_index] = get_rr_features(ecg,fs,t, Rpeak_index,visuals)
     % This functions calculates the RR-interval related features of the ecg
     % signal
 
@@ -9,7 +9,7 @@ function [median_RRinterval, ifa_index] = get_rr_features(fs, Rpeak_index)
 
 %[~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
 % RR intervals in milliseconds
-rr_serie = (diff(Rpeak_index))*(1/fs)*1000;
+rr_serie = (diff(Rpeak_index))*(1/fs);
 
 % MRR as the median of RR intervals in the ecg
 median_RRinterval = median(rr_serie);
@@ -39,7 +39,7 @@ end
 % Rule 2
 for i = 1:length(rr_serie) - 2
     condition_2_1 = abs(rr_serie(i)-rr_serie(i+1)) < (0.3 * mrr(i+1));
-    condition_2_2 = ((rr_serie(i) < (0.8*mrr(i))) || (rr_serie(i) < 0.8*mrr(i+1)));
+    condition_2_2 = ((rr_serie(i) < (0.8*mrr(i+1))) || (rr_serie(i) < 0.8*mrr(i+1)));
     condition_2_3 = (rr_serie(i+2) > (0.6*(rr_serie(i)+rr_serie(i+1))));
     if (condition_2_1 && condition_2_2 && condition_2_3)
         ifa_index(i) = ifa_index(i) + 1;
