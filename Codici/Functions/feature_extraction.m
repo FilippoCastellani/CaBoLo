@@ -39,12 +39,12 @@ function features = feature_extraction(recordName,ecg, fs, t, visuals)
 
     if visuals>1
         figure; tlim = [0 10]; amplim= [-1 2];
-        hold on; plot(t, ecg); scatter(Rpeak_instant,ecg(Rpeak_index),'m'); hold off; ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
+        hold on; plot(t, ecg); scatter(Rpeak_index,ecg(Rpeak_index),'m'); hold off; ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
         title('QRS on Filtered Signal');
     end 
 
     % RR time series
-    RR_serie = diff(Rpeak_instant);
+    RR_serie = diff(Rpeak_index)/fs;
 
     if visuals
         figure; amplim= [0 4];
