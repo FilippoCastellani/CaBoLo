@@ -68,7 +68,7 @@ clear;
 
 %% Loading data
 % Let's pick a patient
-SelectedPatient='A00004';
+SelectedPatient='A00001';
 
 SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
@@ -82,8 +82,13 @@ SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 ecg = signal;
 verbose= 1;
 
-ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);                               % (1) Preprocessing 
-features = feature_extraction(SelectedPatientPath,ecg_cleaned, Fs, time_axis, verbose);     % (2) Feature vector extraction on the processed signal
+% (1) Preprocessing
+ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);                               
+
+%% Feature Extraction
+
+% (2) Feature vector extraction on the processed signal
+features = feature_extraction(SelectedPatientPath,ecg_cleaned, Fs, time_axis, verbose);     
 
 %%
 
