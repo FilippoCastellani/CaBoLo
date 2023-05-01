@@ -1,17 +1,32 @@
 function features = feature_extraction(recordName,ecg, fs, t, visuals)
-    % R peaks detection
-    [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
     
+    % Features:
+    % [ Morphological, AF_features, RR_features]
+    % RR_features = median_RRinterval, ifa_index
+
+    %% R peaks detection
+
+    [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
+    Rpeak_instant = (Rpeak_index)*(1/fs);
+
+    %% Morphological Features
+
     %morphological_features  = get_morphological_features(recordName, ecg, fs, t, visuals, Rpeak_index);
     
-    AF_features             = get_AF_features(recordName, ecg, fs, t, visuals, Rpeak_index);
+    %% RR Features
 
+    [median_RRinterval, ifa_index] = get_rr_features(fs, Rpeak_index);
+    
+    %%
+    %AF_features = get_AF_features(recordName, ecg, fs, t, visuals, Rpeak_index);
+    
+    %% Plots
     if visuals>1
         figure;
         hold on;grid on
         plot(t,ecg);
-        plot(t(pwaves),ecg(pwaves),'or')
-        plot(t(twaves),ecg(twaves),'*g')
+%         plot(t(pwaves),ecg(pwaves),'or')
+%         plot(t(twaves),ecg(twaves),'*g')
     end
 
     if visuals>1
@@ -33,6 +48,6 @@ function features = feature_extraction(recordName,ecg, fs, t, visuals)
     % Features computation
 
     % Feature vector (row)
-    features = []; 
+    features = {median_RRinterval, ifa_index}; 
 
 end 
