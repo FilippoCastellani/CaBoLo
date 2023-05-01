@@ -39,11 +39,15 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 		 - [ ] Morphological Feature ( * ) = implented on [[ECGPUWAVE Note]]
 			 - [ ] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
 			 - [ ] ![QRS1|300](https://upload.wikimedia.org/wikipedia/commons/9/9e/SinusRhythmLabels.svg)
-			 - [ ] ( * ) QRS Duration (Onset-Offset) 
-			 - [ ] PR Interval
-			 - [ ] QT Interval
-			 - [ ] QS Interval
-			 - [ ] ST Interval
+			 - [ ] ( * ) QRS Duration (Q Onset -> S Offset) 
+				 - [ ] "*QRS duration is measured from the beginning of the Q wave to the end of the S wave. A normal range is from 40 to 100 milliseconds*"
+					 - [ ] Source https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3584304/
+				 - [ ] "*Since the maximum duration of the QRS regions can be 150ms-160ms*"
+					 - [ ] Source Detection of ECG Characteristic Features Using Slope Thresholding and Relative Magnitude Comparison https://ieeexplore.ieee.org/abstract/document/6407876/
+			 - [ ] PR Interval (P onset -> QRS Onset)
+			 - [ ] QT Interval (QRS onset  -> T offset)
+			 - [ ] QS Interval ( Q peak -> S peak)
+			 - [ ] ST Interval ( Q onset -> T offset)
 			 - [ ] ( * ) P Amplitude
 			 - [ ] ( * ) Q Amplitude
 			 - [ ] R Amplitude
