@@ -7,8 +7,9 @@ This feature is based on 4 rules and its value is incremented for each rule comp
 
 Such rules consist on comparing three consecutive RR intervals to each other, but also to the mean RR interval of the five nearest beats (MRR). 
 
-> [!WARNING] Doubt
+> [!Todo] Doubt
 > Ma quali sono sti five ? quelli che vengono prima o dopo ? In teoria per calcolare 3RR intervals bastano 4 battiti quindi il 5 da dove esce ??
+> ![[Pasted image 20230501165733.png]]
 
 Those rules are:
  - Rule 1: 

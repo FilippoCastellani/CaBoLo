@@ -17,9 +17,9 @@ $AFEvidence \coloneqq IrregularityEvidence - OriginCount -2*PACEvidence$
 Where $OriginCount$ is the count of the number of values in the bin containing the origin.
 
 Where $PACEvidence$ is defined as follow
-![[Pasted image 20230420162754.png|150]]
+![[Pasted image 20230420162754.png|350]]
 and $IrregularityEvidence$ is defined as
-![[Pasted image 20230420162946.png|150]]
+![[Pasted image 20230420162946.png|350]]
 
 Where $PointCount_n$ counted the number times bins in segment n were populated. 
 $BinCount_n$ counted the number of bins in segment n that were populated at least once.
