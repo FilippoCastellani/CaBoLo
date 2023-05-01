@@ -80,7 +80,7 @@ SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
 %% Filtering
 ecg = signal;
-verbose= 0;
+verbose= 1;
 
 ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);                               % (1) Preprocessing 
 features = feature_extraction(SelectedPatientPath,ecg_cleaned, Fs, time_axis, verbose);     % (2) Feature vector extraction on the processed signal
