@@ -15,7 +15,7 @@ function features = feature_extraction(recordName,ecg, fs, t, visuals)
     
     %% RR Features
 
-    [median_RRinterval, ifa_index] = get_rr_features(fs, Rpeak_index);
+    [median_RRinterval, ifa_index] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
     
     %%
     %AF_features = get_AF_features(recordName, ecg, fs, t, visuals, Rpeak_index);
@@ -43,6 +43,15 @@ function features = feature_extraction(recordName,ecg, fs, t, visuals)
         hold on; plot(RR_serie); hold off; ylabel('RR serie (s)'); xlabel('beats'); ylim(amplim);
         title('Tachogram');
     end 
+
+    if visuals
+        figure; tlim = [0 10]; amplim= [-1 2];
+        hold on; grid on
+        plot(t,ecg);
+        plot(((Rpeak_instant(1:end-1)+Rpeak_instant(2:end))./2),ifa_index,'o');
+        ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
+        title('IfA index on ECG')
+    end
 
 
     % Features computation
