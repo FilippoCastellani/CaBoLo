@@ -18,13 +18,13 @@ function morphological_feature_vector = get_morphological_features(ecg, fs, t, v
     
     %[P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset] = get_ecg_fiducial_points(recordName, ecg, Rpeak_index);
     
-    [T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset] = get_fiducial_points(ecg, Rpeak_index,  fs);
+    [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset]= get_fiducial_points(ecg, Rpeak_index, fs);
    
     if visuals
         figure;
         hold on;grid on
         plot(t,ecg);
-        % color='blue'; peak=P_peak; on=P_onset; off=P_offset; lab='P'; plot(t(peak),ecg(peak),'*','Color',color); xline(on/fs,'-',{lab}, 'Color', color); xline(off/fs,'-',{''},'Color', color);
+        color='cyan'; peak=P_peak; on=P_onset; off=P_offset; lab='P'; plot(t(peak),ecg(peak),'*','Color',color); xline(on/fs,'-',{lab}, 'Color', color); xline(off/fs,'-',{''},'Color', color);
         color='green'; peak=T_peak; on=T_onset; off=T_offset; lab='T'; plot(t(peak),ecg(peak),'*','Color',color); xline(on/fs,'-',{lab}, 'Color', color); xline(off/fs,'-',{''},'Color', color);
         color='red'; on=QRS_onset; off=QRS_offset; lab='QRS';  xline(on/fs,'-',{lab}, 'Color', color); xline(off/fs,'-',{''},'Color', color);
         color='red'; peak=Q_peak'; plot(t(peak),ecg(peak),'*','Color',color);
@@ -32,25 +32,25 @@ function morphological_feature_vector = get_morphological_features(ecg, fs, t, v
         color='red'; peak=R_peak'; plot(t(peak),ecg(peak),'*','Color',color);
     end
     
-    P_amplitude= 0;
-    Q_amplitude = 0;
-    R_amplitude = 0; 
-    S_amplitude = 0;
-    T_amplitude = 0;
+    P_amplitude = median(ecg(P_peak));
+    Q_amplitude = median(ecg(Q_peak));
+    R_amplitude = median(ecg(R_peak)); 
+    S_amplitude = median(ecg(S_peak));
+    T_amplitude = median(ecg(T_peak));
     
     % Compute QRS duration as the difference between onset and offset in seconds
-    QRS_duration = (QRS_offset - QRS_onset)/fs;       % in order to have the duration in seconds
+    QRS_duration = median((QRS_offset - QRS_onset)/fs);       % in order to have the duration in seconds
 
     % Compute PR interval as the difference between onset of P wave and onset of QRS complex
-    PR_duration = (QRS_onset - P_onset)/fs;           % in order to have the duration in seconds
+    PR_duration = median((QRS_onset - P_onset)/fs);           % in order to have the duration in seconds
 
     % Compute QT interval as the difference between onset of QRS complex and offset of T wave
-    QT_duration = (T_offset - QRS_onset)/fs;          % in order to have the duration in seconds
+    QT_duration = median((T_offset - QRS_onset)/fs);          % in order to have the duration in seconds
     
     % Compute QS interval as the difference between Q peak and S peak indexes
-    QS_interval = (swaves-qwaves)/fs;
+    QS_duration = median((S_peak-Q_peak)/fs);
 
     % Compute ST interval as the difference between offset of QRS complex and offset of T wave
-    ST_duration = (T_offset - QRS_offset)/fs;         % in order to have the duration in seconds 
+    ST_duration = median((T_offset - QRS_offset)/fs);         % in order to have the duration in seconds 
 
-    morphological_feature_vector = [QRS_duration, PR_duration, QT_duration, QS_interval, ST_duration, P_amplitude, Q_amplitude, R_amplitude, S_amplitude, T_amplitude];
+    morphological_feature_vector = [QRS_duration, PR_duration, QT_duration, QS_duration, ST_duration, P_amplitude, Q_amplitude, R_amplitude, S_amplitude, T_amplitude];
