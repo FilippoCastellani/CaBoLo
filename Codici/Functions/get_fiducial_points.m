@@ -25,21 +25,13 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
     S_peak = nan(1,n);
     
     for i=(1:n)     % for each R peak
-        start=R_peak(i)-wnd; stop=R_peak(i);
-        if start<1
-            start=1;
-        end
-        qr_signal = ecg(start:stop); % get the QR segment
+        [start_qr_signal, ~, qr_signal]= window(ecg, R_peak(i)-wnd, R_peak(i)); % get the QR segment
         [~, Qloc_rel] = min(qr_signal); % find the negative peak 
-        Q_peak(i) = Qloc_rel+start-1; % store its location wrt the whole ecg
-    
-        start=R_peak(i); stop=R_peak(i)+wnd;
-        if stop>length(ecg)
-            stop=length(ecg);
-        end
-        rs_signal = ecg(start:stop); % get the RS segment
+        Q_peak(i) = relocate(Qloc_rel, start_qr_signal); % store its location wrt the whole ecg
+
+        [start_rs_signal, ~, rs_signal]= window(ecg, R_peak(i), R_peak(i)+wnd); % get the RS segment
         [~, Sloc_rel] = min(rs_signal); % find the negative peak 
-        S_peak(i) = Sloc_rel+start-1; % store its location wrt the whole ecg
+        S_peak(i) = relocate(Sloc_rel, start_rs_signal); % store its location wrt the whole ecg
     end
 
     % Compute the QRS onset and offset 
@@ -52,23 +44,15 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
     QRS_offset = nan(1,n);
 
     for i=(1:n)     % for each identified QRS complex
-        start= Q_peak(i)-wnd2; stop= Q_peak(i);
-        if start<1
-            start=1;
-        end 
-        before_q = ecg(start:stop); % get ecg in the 40ms before the Q
+        [start_before_q, ~, before_q] = window(ecg, Q_peak(i)-wnd2, Q_peak(i)); % get ecg in the 40ms before the Q
         slope_before_q = diff(before_q); % get the slope of the segment
-        [~, min_loc_1] = min(slope_before_q); % find the minimum slope
-        QRS_onset(i) = min_loc_1+start-1; % store its location wrt the whole ecg
+        [~, min_loc_sbq] = min(slope_before_q); % find the minimum slope
+        QRS_onset(i) = relocate(min_loc_sbq, start_before_q); % store its location wrt the whole ecg
 
-        start= S_peak(i); stop= S_peak(i)+wnd2;
-        if stop>length(ecg)
-            stop= length(ecg);
-        end 
-        after_S = ecg(start:stop); % get ecg in the 40ms after the S
-        slope_after_S = diff(after_S); % get the slope of the segment
-        [~, min_loc_2] = min(slope_after_S); % find the minimum slope
-        QRS_offset(i) = min_loc_2+start-1; % store its location wrt the whole ecg
+        [start_after_s, ~, after_s] = window(ecg, S_peak(i), S_peak(i)+wnd2); % get ecg in the 40ms after the S
+        slope_after_s = diff(after_s); % get the slope of the segment
+        [~, min_loc_sas] = min(slope_after_s); % find the minimum slope
+        QRS_offset(i) = relocate(min_loc_sas, start_after_s); % store its location wrt the whole ecg
     end 
 
 
@@ -82,30 +66,34 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
         % define the T search window, that is the segment of the signal in
         % which we expect to find the T wave as the 2/3 of the distance between the
         % offset of the QRS complex in the same beat and the onset of the following one
+
+        % this control allows keep forward the previous window in the last cycle 
         if (i<n) 
             t_window_length = round((2/3)*(QRS_onset(i+1)-QRS_offset(i))); 
-        end 
-        start = QRS_offset(i); stop = QRS_offset(i)+t_window_length;
-        if stop>length(ecg) 
-            stop=length(ecg); 
         end
-        t_window = ecg(start:stop);
 
+        [start_t_window, ~, t_window] = window(ecg, QRS_offset(i), QRS_offset(i)+t_window_length);
+        
         % compute the T peak as the maximum value in the T search window
-        [~, max_loc] = max(t_window); % find the peak
-        T_peak(i) = max_loc+start-1; % store its location wrt the whole ecg
+        [~, max_loc_t] = max(t_window); % find the peak
+        T_peak(i) = relocate(max_loc_t, start_t_window); % store its location wrt the whole ecg
 
         % Then compute the onset and the offset identifying the main points of
         % inflections by using the slope in the T search window
         % we will work on the filtered signal to highlight only inflections
         % of interest
+
         M = 7; % order of the lowpass filter
         B = 1/M*ones(M,1);
-        if length(t_window)>M*3
-            filtered_t_window= filtfilt(B,1,t_window);
+
+        % check that the length of the identified window is enough to
+        % perform filtering, if not go with the unfiltered signal
+        if length(t_window)>M*3 
+            filtered_t_window = filtfilt(B,1,t_window);
         else 
-            filtered_t_window=t_window;
+            filtered_t_window = t_window;
         end
+
         slope_t_window = diff(filtered_t_window); 
 
         % Define a threshold for the slope as a percetange of the mean
@@ -117,21 +105,16 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
         emp_ptg = 0.5; % empirical percentage
         
         % onset
-        if max_loc<length(slope_t_window)
-            stop_2 = max_loc;
-        else 
-            stop_2 = length(slope_t_window);
-        end 
-        slope_beforeT = slope_t_window(1:stop_2);
-        on_thr = mean(slope_beforeT)*emp_ptg;
-        on_loc = find_first_rise(slope_beforeT, on_thr, 1);
-        T_onset(i) = on_loc+start-1;
+        [~, ~, slope_before_t] = window(slope_t_window, 1, max_loc_t); % get the slope of the T wave before the peak
+        on_thr = mean(slope_before_t)*emp_ptg; % compute the threshold for the upward side
+        on_loc = find_first_rise(slope_before_t, on_thr, 1); % find the location of the first positive inflection of the slope (return the beggining of the window if none is found)
+        T_onset(i) = relocate(on_loc, start_t_window); % store its location wrt the whole ecg
 
         % offset
-        slope_afterT = slope_t_window(max_loc:end);
-        of_thr = mean(slope_afterT)*emp_ptg;
-        of_loc = find_first_rise(slope_afterT, of_thr, length(slope_afterT));
-        T_offset(i) = of_loc+T_peak(i)-1;   
+        [~, ~, slope_after_t] = window(slope_t_window, max_loc_t, length(slope_t_window)); % get the slope of the T wave after the peak
+        of_thr = mean(slope_after_t)*emp_ptg; % compute the threshold for the downward side
+        of_loc = find_first_rise(slope_after_t, of_thr, length(slope_after_t)); % find the location of the first negative inflection of the slope (return the end of the window if none is found)
+        T_offset(i) = relocate(of_loc, T_peak(i)); % store its location wrt the whole ecg
 
         % figure; hold on; plot(t_window); plot(filtered_t_window); plot(slope_t_window); yline(0); yline(on_thr); yline(of_thr); xline(on_loc); xline(of_loc+max_loc); hold off;
 
@@ -149,30 +132,33 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
         % which we expect to find the P wave as the distance between the
         % offset of the T wave of the previous beat and the onset of the
         % QRS complex in the same beat
+
+        % this control allows keep backward the previous window in the last cycle 
         if (i>1) 
             p_window_length = round((2/3)*(QRS_onset(i)-T_offset(i-1))); 
         end 
-        start = QRS_onset(i)-p_window_length; stop= QRS_onset(i);
-        if start<1
-            start=1;
-        end
-        p_window = ecg(start:stop);
+
+        [start_p_window, ~, p_window] = window(ecg, QRS_onset(i)-p_window_length, QRS_onset(i));
 
         % compute the P peak as the maximum value in the P search window
-        [~, max_loc] = max(p_window); % find the peak
-        P_peak(i) = max_loc+start-1; % store its location wrt the whole ecg
+        [~, max_loc_p] = max(p_window); % find the peak
+        P_peak(i) = relocate(max_loc_p, start_p_window); % store its location wrt the whole ecg
 
         % Then compute the onset and the offset identifying the main points of
         % inflections by using the slope in the P search window
         % we will work on the filtered signal to highlight only inflections
         % of interest
+
+        % check that the length of the identified window is enough to
+        % perform filtering, if not go with the unfiltered signal
         M = 7; % order of the lowpass filter
         B = 1/M*ones(M,1);
         if length(p_window)>M*3
-            filtered_p_window= filtfilt(B,1,p_window);
+            filtered_p_window = filtfilt(B,1,p_window);
         else 
-            filtered_p_window=p_window;
+            filtered_p_window = p_window;
         end
+        
         slope_p_window = diff(filtered_p_window); 
 
         % Define a threshold for the slope as a percetange of the mean
@@ -184,21 +170,16 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
         emp_ptg = 0.2; % empirical percentage
         
         % onset
-        if max_loc<length(slope_p_window)
-            stop_2 = max_loc;
-        else 
-            stop_2 = length(slope_p_window);
-        end 
-        slope_beforeP = slope_p_window(1:stop_2);
-        on_thr = mean(slope_beforeP)*emp_ptg;
-        on_loc = find_first_rise(slope_beforeP, on_thr, 1);
-        P_onset(i) = on_loc+start-1;
+        [~, ~, slope_before_p] = window(slope_p_window, 1, max_loc_p); % get the slope before the P peak
+        on_thr = mean(slope_before_p)*emp_ptg; % compute the threshold for the upward side
+        on_loc = find_first_rise(slope_before_p, on_thr, 1); % find the first point of positive inflection (return the beginning if none is found)
+        P_onset(i) = relocate(on_loc, start_p_window);
 
         % offset
-        slope_afterP = slope_p_window(max_loc:end);
-        of_thr = mean(slope_afterP)*emp_ptg;
-        of_loc = find_first_rise(slope_afterP, of_thr, length(slope_afterP));
-        P_offset(i) = of_loc+P_peak(i)-1;   
+        [~, ~, slope_after_p] = window(slope_p_window, max_loc_p, length(slope_p_window)); % get the slope after the P peak
+        of_thr = mean(slope_after_p)*emp_ptg; % compute the threshold for the downward side
+        of_loc = find_first_rise(slope_after_p, of_thr, length(slope_after_p)); % find the first point of negative inflection (return the end if none is found)
+        P_offset(i) = relocate(of_loc, P_peak(i));   
 
         %figure; hold on; plot(p_window); plot(filtered_p_window); plot(slope_p_window); yline(0); yline(on_thr); yline(of_thr); xline(on_loc); xline(of_loc+max_loc); plot(max_loc, p_window(max_loc), '*r'); hold off; legend({'original signal','filtered signal','slope of filtered signal'})
 
