@@ -1,9 +1,19 @@
 function [median_RRinterval, ifa_index] = get_rr_features(ecg,fs,t, Rpeak_index,visuals)
-    % This functions calculates the RR-interval related features of the ecg
+    % This functions calculates the RR-interval related features of the ECG
     % signal
+    
+    % OUTPUTS
 
-    % - [ ] Median RR interval
-    % - [ ] Index for Arrhythmia (IfA)
+    % - [ ] Median RR interval (median_RRinterval)
+    % - [ ] Index for Arrhythmia (ifa_index)
+
+    % INPUTS
+
+    % ecg: ECG recording
+    % fs: sampling frequency
+    % t: time vector of the recording
+    % Rpeak_index: R peaks detection with Pan-Tompkin's algorithm
+    % visuals: flag defining whether to plot visuals or not
 
 %% Median RR interval
 
