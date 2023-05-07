@@ -1,4 +1,4 @@
-function [OriginCount,IrrEv,PACEv,AnisotropyEv,DensityEv,RegularityEv] = get_AFEv_metrics( dRR, XYedges, debug )
+function [OriginCount,IrrEv,PACEv,AnisotropyEv,DensityEv,RegularityEv] = get_AFEv_metrics( dRR, XYedges, debug , visuals)
 
 %  This function:
 
@@ -58,19 +58,20 @@ end
 
 % BUILD HISTOGRAM
 
-% Specify bin centers of the histogram
-% bin_c=-0.58:0.04:0.58;
 
 % Three dimensional histogram of bivariate data 
-% [Z, C] = hist3(dRRnew,'Edges', {bin_c, bin_c});
-% XYedges=-0.9375:0.0625:0.9375;
+if(visuals)
+% Specify bin centers of the histogram
+bin_c=-0.58:0.04:0.58;
+    hist3(dRRnew,'Edges', {bin_c, bin_c}, 'CDataMode','auto','FaceColor','interp');
+end
 
 [N] = histcounts2(dRRnew(:,1),dRRnew(:,2),XYedges,XYedges);
 Z=N;                
 if debug>0
     figure(debug);
     clf;
-    hist3(dRRnew,'Edges', {XYedges,XYedges});
+    hist3(dRRnew,'Edges', {XYedges,XYedges},'CDataMode','auto','FaceColor','interp');
     grid on;
 end
 
@@ -92,11 +93,11 @@ Z(N0,N1:N2)=0;
 Z(N1:N2,N0:N3)=0;
 Z(N3,N1:N2)=0;
 
-% [X,Y]=meshgrid(-0.58:0.04:0.58, -0.58:0.04:0.58);
-% surf(X,Y, Z);
-% axis tight
-% xlabel('dRR(i-1)')
-% ylabel('dRR(i)')
+ [X,Y]=meshgrid(XYedges(1:end-1), XYedges(1:end-1));
+ surf(X,Y, Z);
+ axis tight
+ xlabel('dRR(i-1)')
+ ylabel('dRR(i)')
 
 %COMPUTE BinCount12 
 %COMPUTE PointCount12 
