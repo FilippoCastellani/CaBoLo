@@ -22,7 +22,7 @@ function [morphological_feature_vector, AF_features, RR_features] = feature_extr
     RR_features = [];
     
     %% AF features
-    AFEv, Radius, ShannonEntropy, KSTestValue = get_AF_features(ecg, fs, t, Rpeak_index, visuals);
+    [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, t, Rpeak_index, visuals);
 
     %% to be checked
 
