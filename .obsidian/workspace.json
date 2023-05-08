@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NotePersonaliFilippo/Features/AFEv.md",
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NotePersonaliFilippo/Features/AFEv.md",
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NotePersonaliFilippo/Features/AFEv.md",
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NotePersonaliFilippo/Features/AFEv.md"
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md"
               }
             }
           }
@@ -158,23 +158,23 @@
   "active": "266814e96a42c4bc",
   "lastOpenFiles": [
     "Codici/Functions/get_AF_features.asv",
-    "NotePersonaliFilippo/Features/Similarity Indexes Between Beats.md",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.mat",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.trigger",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.hea-",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.hea",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.rec",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.edf",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.atr",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.dat",
+    "Codici/main.asv",
     "README.md",
+    "NotePersonaliFilippo/Features/AFEv.md",
+    "NotePersonaliFilippo/Features/Similarity Indexes Between Beats.md",
     "NotePersonaliFilippo/Features/Shannon Entropy.md",
     "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
     "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
-    "NotePersonaliFilippo/Features/AFEv.md",
     "ECGPUWAVE Note.md",
     "Codici/Functions/get_AFEv_metrics.asv",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.mat",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.trigger",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.hea-",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.hea",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.rec",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.edf",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.atr",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00004.dat",
-    "Codici/main.asv",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230501165733.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420185519.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420181933.png",
