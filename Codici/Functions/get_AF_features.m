@@ -3,11 +3,12 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     %
     % - [ ] AFEv 
     % - [X] Radius [[AFEv#Radius sub-feature]]
-    % - [ ] Shannon Entropy
+    % - [X] Shannon Entropy
     % - [ ] Kolmogorov-Smirnov Test Value
     %
     
     %% AFEv
+    AFEv=0;
     % In order to calculate the AFEv, the following steps are taken:
     % Create RR intervals from the R-peak locations
     rr_series = (diff(Rpeak_index))*(1/fs)*1000;               % in ms
@@ -78,13 +79,14 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     high_resolution_Y_edge= -Lorenz_Y_boundary:high_resolution_bin_lateral_size:Lorenz_Y_boundary;
     high_resolution_p_hist = flip(hist3([X1' X2'],'ctrs',{high_resolution_X_edge high_resolution_Y_edge}));
 
-    figure()
+    if (visuals) figure(); end
+    
     while Radius < Lorenz_X_boundary
         Radius = Radius + high_resolution_bin_lateral_size;
         [x,y] = meshgrid(-Lorenz_X_boundary:high_resolution_bin_lateral_size:Lorenz_X_boundary);
         mask = x.^2 + y.^2 <= Radius^2;
         % mask = mask(1:end-1,1:end-1);
-        image(mask*255)
+        if(visuals) image(mask*255); end
 
         % calculate the percentage of points that are inside the circle
         points_inside_circle = sum(sum(mask.*high_resolution_p_hist));
@@ -111,11 +113,85 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     end
     
     %% Shannon Entropy
+    % This feature provides a quantitative measure of uncertainty for a random variable.
+    % The random variable in our case is the value taken by the rr_series vector.
+    % SE quantifies the likelihood that runs of patterns exhibiting regularity over 
+    % some duration of data also exhibit similar regular patterns over the next 
+    % incremental duration of data. 
+    
+    % For example, a random white noise signal (statistically independent signal) 
+    % is expected to have the highest SE value (1.0) since it shows maximum uncertainty
+    % in predicting the pattern of the signal whereas a simple sinusoidal signal (data 
+    % are not independent) has a very low SE value approaching 0. 
+
+    % Thus, the SE of normal sinus rhythm is expected to be significantly lower than in AF.
+    
+    % 1. To calculate SE of the RR time series, we first construct a histogram of the segment
+    % considered. 
+    % 1.A The eight longest and eight shortest RR values in the segment are 
+    % considered outliers and are removed from consideration. 
+    
+    % 1.B The remaining RRs are sorted into equally spaced bins whose limits are defined by
+    % the shortest and longest R after removing outliers. 
+    % To obtain a reasonably accurate measure of the SE, at least 16 such bins are required.
+    
+    % 2. The probability distribution is computed for each bin as the number of beats in that 
+    % bin divided by the total number of beats in the segment (after removing outliers),
+
     ShannonEntropy=0;
+
+    num_bins = 16;
+
+    % First we need to compute the histogram of the RR intervals
+    % Outliers are removed
+    tail_percentage = 5; % This value was chosen empirically AVVERTI CHIARA E NELLY
+    rr_series_no_outliers = rr_series(rr_series > prctile(rr_series, tail_percentage) & rr_series < prctile(rr_series, 100 - tail_percentage));
+
+    if (visuals)
+        figure()
+        h = histogram(rr_series, num_bins);
+        hold on
+        histogram(rr_series_no_outliers, h.BinEdges);
+        legend('Original','No outliers')
+        title('Histogram of RR intervals')
+        xlabel('RR_{n} (ms)')
+        ylabel('Count')
+    end
+
+    % Now lets compute the bin edges (now that we have removed the outliers)
+    bin_edges = linspace(min(rr_series_no_outliers), max(rr_series_no_outliers), num_bins+1);
+
+    % once again we need to count how many points are in each bin
+    [counts, ~] = histcounts(rr_series_no_outliers, bin_edges);
+
+    % compute the probability distribution
+    probability_distribution = counts/sum(counts);
+
+    if (visuals)
+        figure()
+        bar(bin_edges(1:end-1), probability_distribution)
+        title('Probability distribution of the RR intervals')
+        xlabel('RR_{n} (ms)')
+        ylabel('Probability')
+    end
+
+    % Before applying the SE formula we need to remove the zero values from the probability distribution
+    % otherwise the log(0) will give us NaN
+    non_zero_prob_distribution = nonzeros(probability_distribution);
+    
+    % this is justified by the fact that the probability distribution where 
+    % equal to zero is muliplying the log(0) and thus the contribution is 
+    % zero in any case.
+    % If we had more samples we would have had no empty bins but at the same 
+    % time very low value for probability and this would have "fixed" the
+    % issue.
+
+    % Apply the definition of Shannon Entropy
+    ShannonEntropy = -sum(non_zero_prob_distribution.*log(non_zero_prob_distribution));
 
     %% Kolmogorov Smirnov Test
     KSTestValue=0;
-        
+end
     
 
     
