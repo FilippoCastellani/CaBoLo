@@ -88,7 +88,7 @@ ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);
 %% Feature Extraction
 
 % (2) Feature vector extraction on the processed signal
-verbose=1;
+verbose=0;
 [morphological_feature_vector, AF_features, RR_features] = feature_extraction(ecg_cleaned, Fs, time_axis, verbose);     
 
 %%
