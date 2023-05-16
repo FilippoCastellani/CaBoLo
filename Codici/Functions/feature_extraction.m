@@ -18,8 +18,11 @@ function [morphological_feature_vector, AF_features, RR_features] = feature_extr
     
     %% RR Features
 
-    % [median_RRinterval, ifa_index] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
-    RR_features = [];
+    [median_RRinterval, ifa_index] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
+    
+    %% Similairty Features
+
+    [QRS_similarity, R_similarity, HighBeats_similarity, SQindex] = get_similarity_features(ecg, fs, t, Rpeak_index, visuals);
     
     %% AF features
     [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, t, Rpeak_index, visuals);
