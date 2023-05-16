@@ -57,9 +57,9 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 				 - [ ] ![QRS|400](https://litfl.com/wp-content/uploads/2018/10/ECG-waves-segments-and-intervals-LITFL-ECG-library-3.jpg.webp)
 		 - [ ] AF Features
 			 - [ ] [[AFEv]] 
-				 - [ ] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?
-			 - [ ] Radius [[AFEv#Radius sub-feature]]
-			 - [ ] [[Shannon Entropy]] 
+				 - [x] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?
+			 - [x] Radius [[AFEv#Radius sub-feature]]
+			 - [x] [[Shannon Entropy]] 
 				 - [ ] Doubt: vedi nota
 			 - [ ] [[Kolmogorov-Smirnov Test Value]]
 				 - [ ] Doubt: vedi nota

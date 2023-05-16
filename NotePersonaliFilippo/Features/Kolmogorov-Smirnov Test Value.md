@@ -20,3 +20,5 @@ RIMANE SOLO DA CORREGGERE
 > [!Warning] 
 > COME FACCIAMO con la distribuzione AF ce la inventiamo ?
 > #TO_UNDERSTAND 
+
+![[A_Novel_Method_for_Detection_of_the_Transition_Between_Atrial_Fibrillation_and_Sinus_Rhythm.pdf]]
