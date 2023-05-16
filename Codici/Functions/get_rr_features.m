@@ -4,8 +4,8 @@ function [median_RRinterval, ifa_index] = get_rr_features(ecg,fs,t, Rpeak_index,
     
     % OUTPUTS
 
-    % - [ ] Median RR interval (median_RRinterval)
-    % - [ ] Index for Arrhythmia (ifa_index)
+    % - [X] Median RR interval (median_RRinterval)
+    % - [X] Index for Arrhythmia (ifa_index)
 
     % INPUTS
 
@@ -18,7 +18,7 @@ function [median_RRinterval, ifa_index] = get_rr_features(ecg,fs,t, Rpeak_index,
 %% Median RR interval
 
 %[~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
-% RR intervals in milliseconds
+% RR intervals in seconds
 rr_serie = (diff(Rpeak_index))*(1/fs);
 
 % MRR as the median of RR intervals in the ecg
