@@ -66,6 +66,10 @@ clear;
 
     end
 
+%% Generate Atrial Fibrillation Cumulative Distribution
+
+generate_af_cumulative_distribution(DatasetFolderPrefix, 7)
+
 %% Loading data
 % Let's pick a patient
 SelectedPatient='A00001';
@@ -88,11 +92,10 @@ ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);
 %% Feature Extraction
 
 % (2) Feature vector extraction on the processed signal
-verbose=0;
+verbose=1;
 [morphological_feature_vector, AF_features, RR_features] = feature_extraction(ecg_cleaned, Fs, time_axis, verbose);     
 
 %%
-
 %ecgpuwave
 
 % may be usefull to check results:
