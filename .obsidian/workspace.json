@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+                "file": "NotePersonaliFilippo/Features/AFEv.md",
                 "mode": "source",
                 "source": false
               }
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+                "file": "NotePersonaliFilippo/Features/AFEv.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+                "file": "NotePersonaliFilippo/Features/AFEv.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md"
+                "file": "NotePersonaliFilippo/Features/AFEv.md"
               }
             }
           }
@@ -157,22 +157,22 @@
   },
   "active": "266814e96a42c4bc",
   "lastOpenFiles": [
-    "Codici/Functions/generate_af_cumulative_distribution.m",
-    "NotePersonaliFilippo/BSP ATTACHMENTS/Articles/A_Novel_Method_for_Detection_of_the_Transition_Between_Atrial_Fibrillation_and_Sinus_Rhythm.pdf",
-    "NotePersonaliFilippo/BSP ATTACHMENTS/Articles/A_Novel_Method_for_Detection_of_the_Transition_Between_Atrial_Fibrillation_and_Sinus_Rhythm.pdf.crdownload",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.mat",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.trigger",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.hea-",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.hea",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.rec",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.edf",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.atr",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00067.dat",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00054.mat",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00054.trigger",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00054.hea-",
     "README.md",
-    "NotePersonaliFilippo/Features/AFEv.md",
     "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+    "NotePersonaliFilippo/Features/AFEv.md",
     "NotePersonaliFilippo/Features/Shannon Entropy.md",
     "NotePersonaliFilippo/Features/Similarity Indexes Between Beats.md",
-    "Codici/Functions/get_AF_features.asv",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.mat",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.trigger",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.hea-",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.hea",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.rec",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.edf",
-    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00001.atr",
     "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
     "ECGPUWAVE Note.md",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230501165733.png",
