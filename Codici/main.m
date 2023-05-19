@@ -36,6 +36,19 @@ clear;
         DatasetFolderPrefix = 'Dataset/training2017/';
         DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
         
+        elseif(getenv('COMPUTERNAME')=="F-C")
+        PROJECT_DIRECTORY = 'C:/Users/caste/CaBoLo_Git/CaBoLo/Codici/';
+        cd(PROJECT_DIRECTORY);
+        
+        % add WFDB toolbox to search path
+        addpath(genpath("C:/Users/caste/CaBoLo_Git/CaBoLo/Codici/WFDB_Toolbox"));
+
+        % add functions folder to search path
+        addpath(genpath("C:/Users/caste/CaBoLo_Git/CaBoLo/Codici/Functions"));
+         
+        DatasetFolderPrefix = 'Dataset/training2017/';
+        DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+        
       
     elseif(getenv('COMPUTERNAME')=="") % Computer Nelly
          PROJECT_DIRECTORY = '/Users/antonellalombardi/Documents/GitHub/CaBoLo/Codici/';
@@ -65,10 +78,10 @@ clear;
         %DatasetPath = "default"; %put your path here;
 
     end
-
+    
 %% Generate Atrial Fibrillation Cumulative Distribution
 
-generate_af_cumulative_distribution(DatasetFolderPrefix, 7)
+generate_af_cumulative_distribution(DatasetFolderPrefix, 8, true)
 
 %% Loading data
 % Let's pick a patient
