@@ -13,6 +13,9 @@ function similarity_vector = get_similarity(ecg, onsets, offsets, flag)
 %%
     % Initialize similarity vector 
      similarity_vector = zeros(length(onsets)-1, 1);
+    % Normalizaion of ECG signal between [0 1] before computing 
+    % the correlation
+     ecg_normalized = (ecg - min(ecg)) / (max(ecg) - min(ecg));
 
 %     if flag
 %         x = ecg(onsets);
@@ -35,14 +38,9 @@ function similarity_vector = get_similarity(ecg, onsets, offsets, flag)
         if flag
             % calculating similarity between consecutive R amplitudes
             % take one sample before and after to create a small window
-            x = ecg(onsets(i)-1:onsets(i)+1);
-            y = ecg(offsets(i+1)-1:offsets(i+1)+1);
+            x = ecg_normalized(onsets(i)-1:onsets(i)+1);
+            y = ecg_normalized(offsets(i+1)-1:offsets(i+1)+1);
         else
-            % Normalizaion of ECG signal between [-1 1] to compute
-            % the correlation on the morphological information only
-            % of the QRS complexes, discarding the ammplitude information.
-            ecg_normalized = 2 * (ecg - min(ecg)) / (max(ecg) - min(ecg)) - 1;
-            % ecg_normalized = ecg;
             % Extract the two signals
             x = ecg_normalized(onsets(i):offsets(i));
             y = ecg_normalized(onsets(i+1):offsets(i+1));
@@ -50,15 +48,21 @@ function similarity_vector = get_similarity(ecg, onsets, offsets, flag)
         % Compute correlation
         corr = xcorr(x, y);
         
+        % Normalization of correlation values on the length of the 
+        % window of the signal.
+        % xcorr applies a padding to the smallest window, so the 
+        % normalization is done on the one with the max length.
+        normalized_corr = corr/max(length(x),length(y));
+        
         % Find max value of correlation
-        [~, max_index] = max(corr);
+        [~, max_index] = max(normalized_corr);
         
         % Add max value to the similarity vector (mean computed outside)
-        similarity_vector(i) = corr(max_index);
+        similarity_vector(i) = normalized_corr(max_index);
     
     end
 
     % Normalize the Similarity vector between [0 1]
-    similarity_vector = (similarity_vector - min(similarity_vector)) / (max(similarity_vector) - min(similarity_vector));
+    % similarity_vector = (similarity_vector - min(similarity_vector)) / (max(similarity_vector) - min(similarity_vector));
     
 end
