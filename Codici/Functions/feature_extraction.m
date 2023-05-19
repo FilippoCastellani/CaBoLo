@@ -1,4 +1,4 @@
-function [morphological_feature_vector, AF_features, RR_features] = feature_extraction(ecg, fs, t, visuals)
+function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector] = feature_extraction(ecg, fs, t, visuals)
     % This function returns the feature vector for the ecg signal in input
     % Inputs:
     % ecg: signal of interest
@@ -19,14 +19,19 @@ function [morphological_feature_vector, AF_features, RR_features] = feature_extr
     %% RR Features
 
     [median_RRinterval, ifa_index] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
+
+    RR_feature_vector = [median_RRinterval, ifa_index];
     
     %% Similairty Features
 
     [QRS_similarity, R_similarity, HighBeats_similarity, SQindex] = get_similarity_features(ecg, fs, t, Rpeak_index, visuals);
     
+    similarity_feature_vector = [QRS_similarity, R_similarity, HighBeats_similarity, SQindex];
     %% AF features
+    
     [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, t, Rpeak_index, visuals);
 
+    AF_feature_vector = [AFEv, Radius, ShannonEntropy, KSTestValue];
     %% to be checked
 
     % 
