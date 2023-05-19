@@ -1,4 +1,4 @@
-The K–S test assesses whether two distributions are different from each other by **measuring the maximum value of the absolute difference (D) between two cumulative probability distributions**. 
+The K–S test assesses whether two distributions are different from each other by **measuring the maximum value of the absolute difference (D) between two cumulative probability distributions**.
 
 An example of cumulative probability distributions of the standard AF distribution compares with a distribution of test data.
 
@@ -17,8 +17,5 @@ $N_e = {{N_1 N_2 }\over {N_1 + N_2}}$
 RIMANE SOLO DA CORREGGERE
 ![[Pasted image 20230420185519.png]]
 
-> [!Warning] 
-> COME FACCIAMO con la distribuzione AF ce la inventiamo ?
-> #TO_UNDERSTAND 
 
 ![[A_Novel_Method_for_Detection_of_the_Transition_Between_Atrial_Fibrillation_and_Sinus_Rhythm.pdf]]
