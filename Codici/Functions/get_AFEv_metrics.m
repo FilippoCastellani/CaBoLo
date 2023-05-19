@@ -75,7 +75,7 @@ if debug>0
     grid on;
 end
 
-N_length = length(N);
+N_length = length(N)-1; % NEED TO TAKE CARE OF THIS ISSSSSUEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 N1 = N_length/2;
 N0 = N1-1;
 N2 = N1+1;
@@ -93,11 +93,12 @@ Z(N0,N1:N2)=0;
 Z(N1:N2,N0:N3)=0;
 Z(N3,N1:N2)=0;
 
- [X,Y]=meshgrid(XYedges(1:end-1), XYedges(1:end-1));
- surf(X,Y, Z);
- axis tight
- xlabel('dRR(i-1)')
- ylabel('dRR(i)')
+[X,Y]=meshgrid(XYedges(1:end-1), XYedges(1:end-1));
+surf(X,Y, Z);
+view(2);
+axis tight
+xlabel('dRR(i-1)')
+ylabel('dRR(i)')
 
 %COMPUTE BinCount12 
 %COMPUTE PointCount12 
@@ -190,16 +191,5 @@ IrrEv=BC1+BC2+BC3+BC4+...
 PACEv=(PC1-BC1)+(PC2-BC2)+(PC3-BC3)+(PC4-BC4)+...
                      (PC5-BC5)+(PC6-BC6)+(PC10-BC10)-...
                          (PC7-BC7)-(PC8-BC8)-(PC12-BC12);
-                     
-% COMPUTE AnisotropyEv
-AnisotropyEv = abs((PC9+PC11) - (PC10+PC12))+...
-                abs((PC6+PC7) - (PC5+PC8));
-            
-% COMPUTE  DensityEv       
-DensityEv = (PC5-BC5)+(PC6-BC6)+(PC7-BC7)+(PC8-BC8)+...
-            (PC9-BC9)+(PC10-BC10)+(PC11-BC11)+(PC12-BC12);
-
-% COMPUTE RegularityEv
-RegularityEv = 0;
 
 end

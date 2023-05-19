@@ -58,9 +58,10 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     end
     
     % Compute AFEv
-    %[OriginCount,IrrEv,PACEv,AnisotropyEv,DensityEv,RegularityEv] = get_AFEv_metrics(drr_series_seconds',X_edge*(1/1000),1, visuals);
+    drr_series_seconds = drr_series / 1000; % in seconds
+    [OriginCount,IrrEv,PACEv] = get_AFEv_metrics(drr_series_seconds',X_edge*(1/1000),1, visuals);
 
-    %AFEv = IrrEv - OriginCount - 2*PACEv;
+    AFEv = IrrEv - OriginCount - 2*PACEv;
     
     %% Radius
     % Radius is a sub-feature 
