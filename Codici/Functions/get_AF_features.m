@@ -4,7 +4,7 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     % - [ ] AFEv 
     % - [X] Radius [[AFEv#Radius sub-feature]]
     % - [X] Shannon Entropy
-    % - [ ] Kolmogorov-Smirnov Test Value
+    % - [X] Kolmogorov-Smirnov Test Value
     %
     
     %% AFEv
@@ -190,7 +190,62 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     ShannonEntropy = -sum(non_zero_prob_distribution.*log(non_zero_prob_distribution));
 
     %% Kolmogorov Smirnov Test
+    % A small prob signifies that the two distributions are significantly 
+    % different from each other. 
+    % Therefore, a high value of prob of a test RRr distribution and the 
+    % standard AF distribution is associated with a positive identification
+    % of AF.
+    
     KSTestValue=0;
+    
+    % perform the Kolmogorov Smirnov test with respect to the the fitted distribution
+    
+    
+    % defining the distribution formula
+    fun = @(p,xdata) p(1) ./ ( 1 + exp(-1*p(2)*(xdata-p(3))) );
+    
+    % load the distribution parameters from the file 'fitted_cumulative_distribution_AF.mat'
+    AF_distribution = load('fitted_cumulative_distribution_AF.mat');
+    Af_distribution_curve = AF_distribution.p;
+    
+    [RR_RR_cumulative_distribution,RR_RR_values] = get_cumulative_distribution_from_signal(ecg, fs, t);
+
+    % compute the maximum absolute distance between the two curves:
+    % - the AF distribution curve
+    % - the cumulative distribution of the RR intervals
+    
+    % evaluate the distribution in the points we're interested in
+    AF_curve_evaluation = fun(Af_distribution_curve,RR_RR_values);
+    difference = abs(AF_curve_evaluation - RR_RR_cumulative_distribution);
+    D = max(difference);
+    
+    % D must be divided by 100 since the probability was between 0 and 100
+    % and it should have been between 0 and 1
+    D = D / 100;
+
+    % if visualisation is required, plot the two curves and also their distance
+    if(true)
+        figure()
+        plot(RR_RR_values,AF_curve_evaluation)
+        hold on
+        plot(RR_RR_values,RR_RR_cumulative_distribution)
+        plot(RR_RR_values, difference)
+        legend('AF distribution curve','Cumulative distribution of the RR intervals','Distance between the two curves')
+        title('Kolmogorov Smirnov Test')
+        xlabel('RR_{n} (ms)')
+        ylabel('Probability')
+    end
+
+    N1=length(RR_RR_values);    %number of samples of the RR interval vector
+    N2=length(AF_curve_evaluation);        %number of samples of the standard distribution
+    Ne = N1 * N2 / (N1 + N2);   %formula presented in the official reference
+
+    lambda = (sqrt(Ne) + 0.12 + (0.11 / sqrt(Ne))) * D;
+    j = (1:1:1000)';
+    KS_probability = 2 * sum((-1).^(j-1) .* exp(-2 * j.^2 * lambda.^2));
+    
+    KSTestValue = KS_probability;
+    
 end
     
 
