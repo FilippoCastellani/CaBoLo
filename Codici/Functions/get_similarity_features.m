@@ -20,34 +20,65 @@ function [QRS_similarity, R_similarity, Ratio_HBS, SQindex] = get_similarity_fea
 % Get fiducial points of interest
 [~, P_onset, ~, ~, ~, T_offset, ~, ~, R_peak, QRS_onset, QRS_offset]= get_fiducial_points(ecg, Rpeak_index, fs);
 
-% Compute similarity between QRS complex
-QRS_similarity_vector = get_similarity(ecg, QRS_onset, QRS_offset, 0);
-QRS_similarity = mean(QRS_similarity_vector);
+%% QRS similarity 
 
-% Compute similarity between R peaks
-R_similarity_vector = get_similarity(ecg, R_peak, R_peak, 1);
-R_similarity = mean(R_similarity_vector);
+% Find max length of QRS complexes
+max_len = max((QRS_offset(1:end) - QRS_onset(1:end))+1);
 
-% Compute High Beats Similarity
-similarity_vector = QRS_similarity_vector .* R_similarity_vector;
-threshold_similarity = prctile(similarity_vector, 60);
-HighBeats_similarity = 0;
-for i = 1:length(similarity_vector)
-    if similarity_vector(i) > threshold_similarity
-        HighBeats_similarity = HighBeats_similarity + 1;
-    end
+% Initialize the matrix for QRS complexes
+QRS_matrix = zeros(length(QRS_onset), max_len);
+
+% Fill QRS matrix
+for i = 1:length(QRS_onset)
+    % Padding complexes shorter than the maximum length
+    qrs = ecg(QRS_onset(i):QRS_offset(i));
+    padsize = max_len - length(qrs);
+    padded_qrs = padarray(qrs, [0, padsize], 0, 'post');
+    % Assign complexes in the matrix
+    QRS_matrix(i,:) = padded_qrs;
 end
 
-Ratio_HBS = HighBeats_similarity/length(similarity_vector);
+% Get the ratio of high similarity beats
+QRS_similarity = get_beat_similarity(QRS_matrix);
 
-% Compute Signal Qualify Index
+%% R Amplitude similarity
+
+% Choose number of samples to create the window for the R amplitude
+n = 1;
+% Initialize matrix of R_peak windows
+r_matrix = zeros(length(R_peak),(2*n)+1);
+
+% Fill the matrix
+for i = 1:length(R_peak)
+    r_window = ecg(R_peak(i)-n:R_peak(i)+n);
+    r_matrix(i,:) = r_window;
+end
+
+% Get the ratio of high similarity beats
+R_similarity = get_beat_similarity(r_matrix);
+
+%% Ratio of High Beats Similarity
+
+% Compute High Beats Similarity
+% Take both information making the product of QRS and R similarity
+%similarity_matrix = QRS_matrix .* r_matrix;
+
+% Get the ratio of high similarity beats
+Ratio_HBS = get_beat_similarity(QRS_matrix, r_matrix);
+
+%% Signal Qualify Index
+
 % Initialize the vector
 SQindex_vector = zeros(length(P_onset)-1, 1);
+
+% Signal Qualify of each beat computed as the difference between the
+% current P-wave onset amplitude and the previous T-wave offset amplitude
 for i = 2:(length(P_onset)-1)
     SQindex_vector(i) = ecg(P_onset(i))-ecg(T_offset(i-1));
 end
 
-% Signal Qualify Index as the mean of the SQindex of each beat
+% Signal Qualify Index of the whole recording as the 
+% standard deviation of the SQindex of each beat
 SQindex = std(SQindex_vector);
 
 end
