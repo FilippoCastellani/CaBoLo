@@ -3,21 +3,17 @@ function morphological_feature_vector = get_morphological_features(ecg, fs, t, v
     %% MORPHOLOGICAL FEATURES
     % compute the following features
     %   - [X] QRS Duration (Onset-Offset) FEATURE 1
-	%	- [ ] PR Interval                 FEATURE 2
-	%	- [ ] QT Interval                 FEATURE 3
-	%	- [ ] QS Interval                 FEATURE 4
-	%	- [ ] ST Interval                 FEATURE 5
-	%	- [ ] P Amplitude                 FEATURE 6
-	%	- [ ] Q Amplitude                 FEATURE 7
-	%	- [ ] R Amplitude                 FEATURE 8
-	%	- [ ] S Amplitude                 FEATURE 9
-	%	- [ ] T Amplitude                 FEATURE 10
+	%	- [X] PR Interval                 FEATURE 2
+	%	- [X] QT Interval                 FEATURE 3
+	%	- [X] QS Interval                 FEATURE 4
+	%	- [X] ST Interval                 FEATURE 5
+	%	- [X] P Amplitude                 FEATURE 6
+	%	- [X] Q Amplitude                 FEATURE 7
+	%	- [X] R Amplitude                 FEATURE 8
+	%	- [X] S Amplitude                 FEATURE 9
+	%	- [X] T Amplitude                 FEATURE 10
 
     % the final morphological_feature_vector is the row vector: 
-    % [QRS_duration, PR_duration, QT_duration, QS_interval, ST_duration, P_amplitude, Q_amplitude, R_amplitude, S_amplitude, T_amplitude]
-    
-    %[P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset] = get_ecg_fiducial_points(recordName, ecg, Rpeak_index);
-    
     [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset]= get_fiducial_points(ecg, Rpeak_index, fs);
    
     if visuals
