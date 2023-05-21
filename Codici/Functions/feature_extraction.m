@@ -11,6 +11,10 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     % R peaks detection with Pan-Tompkin's algorithm
     [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
 
+    % Check for signal inversion
+
+    ecg = check_and_correct_inversion(ecg, Rpeak_index, fs, visuals);
+
     %% Morphological Features
 
     % Morphological features extraction 
