@@ -41,9 +41,9 @@ function morphological_feature_vector = get_morphological_features(ecg, fs, t, v
     PR_duration = median((QRS_onset - P_onset)/fs);           % in order to have the duration in seconds
 
     % Compute QT interval as the difference between onset of QRS complex and offset of T wave
-    QT_duration = median((T_offset - QRS_onset)/fs);          % in order to have the duration in seconds
+    QT_duration = median((T_offset - QRS_onset)/fs);          
     
-    % Compute QS interval as the difference between Q peak and S peak indexes
+    % Compute QS interval as the difference between Q peak and S peak 
     QS_duration = median((S_peak-Q_peak)/fs);
 
     % Compute ST interval as the difference between offset of QRS complex and offset of T wave
