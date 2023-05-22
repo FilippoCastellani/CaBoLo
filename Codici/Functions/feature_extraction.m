@@ -11,10 +11,6 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     % R peaks detection with Pan-Tompkin's algorithm
     [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
 
-    % Check for signal inversion
-
-    ecg = check_and_correct_inversion(ecg, Rpeak_index, fs, visuals);
-
     %% Morphological Features
 
     % Morphological features extraction 
@@ -36,14 +32,13 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, t, Rpeak_index, visuals);
 
     AF_feature_vector = [AFEv, Radius, ShannonEntropy, KSTestValue];
-    %% to be checked
+  
 
-    % 
-    % if visuals>1
-    %     figure; tlim = [0 10]; amplim= [-1 2];
-    %     hold on; plot(t, ecg); scatter(Rpeak_index,ecg(Rpeak_index),'m'); hold off; ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
-    %     title('QRS on Filtered Signal');
-    % end 
+    if visuals>1
+        figure; tlim = [0 10]; amplim= [-1 2];
+        hold on; plot(t, ecg); scatter(Rpeak_index,ecg(Rpeak_index),'m'); hold off; ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
+        title('QRS on Filtered Signal');
+    end 
     % 
     % % RR time series
     % RR_serie = diff(Rpeak_index)/fs;

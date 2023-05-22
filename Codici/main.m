@@ -1,7 +1,5 @@
 %% MAIN SCRIPT
-
-
-%% Clearing previous data and closing all the windows if any
+% Clearing previous data and closing all the windows if any
 
 clc;close all;clear;
 
@@ -84,7 +82,7 @@ generate_af_cumulative_distribution(DatasetFolderPrefix, 8, true)
 
 %% Loading data
 % Let's pick a patient
-SelectedPatient='A00001';
+SelectedPatient='A00006';
 
 SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
@@ -94,18 +92,22 @@ SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 [signal, Fs, time_axis] = load_patient(SelectedPatientPath);
 
 
-%% Filtering
+%% Preprocessing 
 ecg = signal;
 verbose= 1;
 
-% (1) Preprocessing
-ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose);                               
+% (1.1) Filtering
+ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose); 
+
+% (1.2) Correct possible inversion
+ptg = 0.7; % define the threshold as 70% of the max oscillation
+[ecg_checked, inverted] = correct_if_inverted(ecg_cleaned, ptg, time_axis, verbose);
 
 %% Feature Extraction
 
 % (2) Feature vector extraction on the processed signal
 verbose=1;
-[morphological_feature_vector, AF_features, RR_features] = feature_extraction(ecg_cleaned, Fs, time_axis, verbose);     
+[morphological_feature_vector, AF_features, RR_features] = feature_extraction(ecg_checked, Fs, time_axis, verbose);     
 
 %%
 %ecgpuwave
