@@ -107,7 +107,7 @@ ptg = 0.7; % define the threshold as 70% of the max oscillation
 %% Feature Extraction
 
 % (2) Feature vector extraction on the processed signal
-verbose=0;
+verbose=1;
 [morphological_feature_vector, AF_features, RR_features, similarity_feature_vector] = feature_extraction(ecg_checked, Fs, time_axis, verbose);     
 %%
 

@@ -11,6 +11,28 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     % R peaks detection with Pan-Tompkin's algorithm
     [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
 
+    %% Check RR above physiological limits refractory period)
+    RR = diff(Rpeak_index)/fs; % RR time series [s]
+    refractory_period = 0.2; % refractory period [s] = 200 ms
+    RR(RR<refractory_period) = NaN; % set RR below refractory period to NaN
+    invalid_RR = find(isnan(RR)) % identify invalid RR intervals
+
+    for i = 1:length(invalid_RR)
+        i_RR = invalid_RR(i);
+        peak_1 = Rpeak_index(i_RR);
+        peak_2 = Rpeak_index(i_RR+1);
+
+        [~, index] = min([ecg(peak_1),ecg(peak_2)]); % find the minimum between the two peaks
+        if index == 1
+            Rpeak_index(i_RR) = NaN; % set invalid R peaks to NaN
+        else
+            Rpeak_index(i_RR+1) = NaN; % set invalid R peaks to NaN
+        end
+    end
+
+    % drop nan values from Rpeak_index
+    Rpeak_index = Rpeak_index(~isnan(Rpeak_index));
+
     %% Morphological Features
 
     % Morphological features extraction 
@@ -18,9 +40,9 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     
     %% RR Features
 
-    [median_RRinterval, ifa_index] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
+    [median_RRinterval, ifa_index_ratio] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
 
-    RR_feature_vector = [median_RRinterval, ifa_index];
+    RR_feature_vector = [median_RRinterval, ifa_index_ratio];
     
     %% Similairty Features
 
@@ -34,7 +56,7 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     AF_feature_vector = [AFEv, Radius, ShannonEntropy, KSTestValue];
   
 
-    if visuals>1
+    if visuals
         figure; tlim = [0 10]; amplim= [-1 2];
         hold on; plot(t, ecg); scatter(Rpeak_index,ecg(Rpeak_index),'m'); hold off; ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
         title('QRS on Filtered Signal');
