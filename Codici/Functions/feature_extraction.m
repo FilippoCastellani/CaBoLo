@@ -15,7 +15,7 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     RR = diff(Rpeak_index)/fs; % RR time series [s]
     refractory_period = 0.2; % refractory period [s] = 200 ms
     RR(RR<refractory_period) = NaN; % set RR below refractory period to NaN
-    invalid_RR = find(isnan(RR)) % identify invalid RR intervals
+    invalid_RR = find(isnan(RR)); % identify invalid RR intervals
 
     for i = 1:length(invalid_RR)
         i_RR = invalid_RR(i);

@@ -9,7 +9,7 @@ clc; close all; clear;
 %% Extract test filenames 
 
 reference_filepath = [PROJECT_DIRECTORY '/train_data.csv'];
-train_patients = get_filenames(reference_filepath);
+[train_patients, labels] = get_filenames(reference_filepath);
 
 %% Create the csv file to write the features
 
@@ -21,7 +21,7 @@ header = {  'patient_id',  ...
             'QRS_duration', 'PR_duration', 'QT_duration', 'QS_duration', 'ST_duration', 'P_amplitude', 'Q_amplitude', 'R_amplitude', 'S_amplitude', 'T_amplitude', ...
             'AFEv', 'Radius', 'ShannonEntropy', 'KSTestValue', ...
             'median_RRinterval', 'ifa_index_ratio', ...
-            'QRS_similarity', 'R_similarity', 'HighBeats_similarity', 'SQindex' };
+            'QRS_similarity', 'R_similarity', 'HighBeats_similarity', 'SQindex', 'label' };
             
 % Write the header on the csv file
 fid = fopen(filename,'w');
@@ -37,7 +37,7 @@ verbose = 0;
 % Define for the inversion check
 ptg = 0.7; % threshold as 70% of the max oscillation
 
-for i= 1:20 %1:N
+for i= 1:N
     disp(['Processing patient ', num2str(i), ' of ', num2str(N)]);
     file = [DatasetFolderPrefix train_patients{i}];
     disp(file);
@@ -57,8 +57,8 @@ for i= 1:20 %1:N
     % (3) Write on file the feature vector
     fid = fopen(filename,'a');
     fprintf(fid,'%s,',train_patients{i});
-    fprintf(fid,'%f,',feature_vector(1,1:end-1));
-    fprintf(fid,'%f\n',feature_vector(1,end));
+    fprintf(fid,'%f,',feature_vector(1,1:end));
+    fprintf(fid,'%s\n',labels{i});
     fclose(fid);
 end 
 
