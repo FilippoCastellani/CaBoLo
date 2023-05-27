@@ -37,7 +37,7 @@ verbose = 0;
 % Define for the inversion check
 ptg = 0.7; % threshold as 70% of the max oscillation
 
-for i= 1:N
+for i= 41:N
     disp(['Processing patient ', num2str(i), ' of ', num2str(N)]);
     file = [DatasetFolderPrefix train_patients{i}];
     disp(file);
