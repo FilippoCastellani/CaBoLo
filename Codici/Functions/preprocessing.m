@@ -17,6 +17,8 @@ function [y,b,a] = preprocessing(ecg, fs, t, visuals)
     Wn = [fcutlow fcuthigh]/fn; % normlized passband
     
     [b,a] = butter(n,Wn,'bandpass');
+
+    % filt filt is used to avoid phase distortion and hence to preserve the morphology of the signal
     bpfecg = filtfilt(b,a,ecg)'; %bandpass filtered ecg
 
     y = bpfecg;

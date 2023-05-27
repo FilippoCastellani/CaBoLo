@@ -78,8 +78,16 @@ clc;close all;clear;
     
 %% Generate Atrial Fibrillation Cumulative Distribution
 
+% The generation of the cumulative distribution is done only once from a selection of patients AF.
+
+% This is the folder where the AF patients data are stored
 AF_Distribution_Folder =  'Dataset/AF_Distribution_Patients/';
+% The call to the function that generates the cumulative distribution
 generate_af_cumulative_distribution(AF_Distribution_Folder, -1, true)
+% Parameters:
+% AF_Distribution_Folder: the folder where the AF patients data are stored
+% -1: all the patients in the reference .csv file are used
+% true: the plot of the cumulative distribution is shown
 
 %% Loading data
 % Let's pick a patient
@@ -107,7 +115,7 @@ ptg = 0.7; % define the threshold as 70% of the max oscillation
 %% Feature Extraction
 
 % (2) Feature vector extraction on the processed signal
-verbose=1;
+verbose=0;
 [morphological_feature_vector, AF_features, RR_features, similarity_feature_vector] = feature_extraction(ecg_checked, Fs, time_axis, verbose);    
 feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector];
 
