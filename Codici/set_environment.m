@@ -51,6 +51,19 @@ function [PROJECT_DIRECTORY, DatasetFolderPath, DatasetFolderPrefix] = set_envir
         DatasetFolderPrefix = 'Dataset/training2017/';
         DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
     
+    elseif(getenv('COMPUTERNAME')=="F-C")
+        PROJECT_DIRECTORY = 'C:/Users/caste/CaBoLo_Git/CaBoLo/Codici/';
+        cd(PROJECT_DIRECTORY);
+        
+        % add WFDB toolbox to search path
+        addpath(genpath("C:/Users/caste/CaBoLo_Git/CaBoLo/Codici/WFDB_Toolbox"));
+
+        % add functions folder to search path
+        addpath(genpath("C:/Users/caste/CaBoLo_Git/CaBoLo/Codici/Functions"));
+         
+        DatasetFolderPrefix = 'Dataset/training2017/';
+        DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+    
     %else 
         %DatasetPath = "default"; %put your path here;
     
