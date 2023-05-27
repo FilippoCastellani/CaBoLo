@@ -1,4 +1,4 @@
-function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector] = feature_extraction(ecg, fs, t, visuals)
+function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy] = feature_extraction(ecg, fs, t, visuals)
     % This function returns the feature vector for the ecg signal in input
     % Inputs:
     % ecg: signal of interest
@@ -17,6 +17,15 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     RR(RR<refractory_period) = NaN; % set RR below refractory period to NaN
     invalid_RR = find(isnan(RR)); % identify invalid RR intervals
 
+    noisy = 0;
+    
+    % if more than 60% of the RR intervals result to be invalid, it is
+    % deemed unfit for classification
+    if length(invalid_RR) > 0.6*length(RR)
+        noisy = true;
+    end 
+    
+    %%  QUESTO VA CORRETTO !!!!
     for i = 1:length(invalid_RR)
         i_RR = invalid_RR(i);
         peak_1 = Rpeak_index(i_RR);
@@ -33,57 +42,42 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
     % drop nan values from Rpeak_index
     Rpeak_index = Rpeak_index(~isnan(Rpeak_index));
 
-    %% Morphological Features
+    % Set as too noisy to be analyzed signals with less than a minimum
+    % number of beats recognized
+    min_peaks = 5;
+    if length(Rpeak_index) < min_peaks
+        noisy= 1;
+    end
 
-    % Morphological features extraction 
-    morphological_feature_vector = get_morphological_features(ecg, fs, t, visuals, Rpeak_index);
+    if (~noisy)
+
+        % Morphological Features
+        morphological_feature_vector = get_morphological_features(ecg, fs, t, visuals, Rpeak_index);
+        
+        % RR Features
+        [median_RRinterval, ifa_index_ratio] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
+        RR_feature_vector = [median_RRinterval, ifa_index_ratio];
+        
+        % Similairty Features
+        [QRS_similarity, R_similarity, HighBeats_similarity, SQindex] = get_similarity_features(ecg, fs, t, Rpeak_index, visuals);
+        similarity_feature_vector = [QRS_similarity, R_similarity, HighBeats_similarity, SQindex];
+        
+        % AF features
+        [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, t, Rpeak_index, visuals);
+        AF_feature_vector = [AFEv, Radius, ShannonEntropy, KSTestValue];
     
-    %% RR Features
+    else 
+        morphological_feature_vector = NaN(1, 10);
+        RR_feature_vector = NaN(1, 2);
+        similarity_feature_vector = NaN(1, 4);
+        AF_feature_vector = NaN(1, 4);
+    end 
 
-    [median_RRinterval, ifa_index_ratio] = get_rr_features(ecg, fs,t, Rpeak_index,visuals);
-
-    RR_feature_vector = [median_RRinterval, ifa_index_ratio];
-    
-    %% Similairty Features
-
-    [QRS_similarity, R_similarity, HighBeats_similarity, SQindex] = get_similarity_features(ecg, fs, t, Rpeak_index, visuals);
-    
-    similarity_feature_vector = [QRS_similarity, R_similarity, HighBeats_similarity, SQindex];
-    %% AF features
-    
-    [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, t, Rpeak_index, visuals);
-
-    AF_feature_vector = [AFEv, Radius, ShannonEntropy, KSTestValue];
-  
 
     if visuals
         figure; tlim = [0 10]; amplim= [-1 2];
         hold on; plot(t, ecg); scatter(Rpeak_index,ecg(Rpeak_index),'m'); hold off; ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
         title('QRS on Filtered Signal');
     end 
-    % 
-    % % RR time series
-    % RR_serie = diff(Rpeak_index)/fs;
-
-    % if visuals
-    %     figure; amplim= [0 4];
-    %     hold on; plot(RR_serie); hold off; ylabel('RR serie (s)'); xlabel('beats'); ylim(amplim);
-    %     title('Tachogram');
-    % end 
-
-    % if visuals
-    %     figure; tlim = [0 10]; amplim= [-1 2];
-    %     hold on; grid on
-    %     plot(t,ecg);
-    %     plot(((Rpeak_instant(1:end-1)+Rpeak_instant(2:end))./2),ifa_index,'o');
-    %     ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
-    %     title('IfA index on ECG')
-    % end
-
-
-    % % Features computation
-    % 
-    % % Feature vector (row)
-    % features = {median_RRinterval, ifa_index}; 
 
 end 

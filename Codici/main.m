@@ -91,7 +91,7 @@ generate_af_cumulative_distribution(AF_Distribution_Folder, -1, true)
 
 %% Loading data
 % Let's pick a patient
-SelectedPatient='A00020';
+SelectedPatient='A01330';
 
 SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
@@ -115,9 +115,9 @@ ptg = 0.7; % define the threshold as 70% of the max oscillation
 %% Feature Extraction
 
 % (2) Feature vector extraction on the processed signal
-verbose=0;
-[morphological_feature_vector, AF_features, RR_features, similarity_feature_vector] = feature_extraction(ecg_checked, Fs, time_axis, verbose);    
-feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector];
+verbose=1;
+[morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy] = feature_extraction(ecg_checked, Fs, time_axis, verbose);    
+feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy];
 
 %%
 %ecgpuwave

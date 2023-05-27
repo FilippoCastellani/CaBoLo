@@ -1,7 +1,7 @@
 function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, t, Rpeak_index, visuals)
     % This function calculates Atrial Fibrillation features from the ECG signal
     %
-    % - [ ] AFEv 
+    % - [X] AFEv 
     % - [X] Radius [[AFEv#Radius sub-feature]]
     % - [X] Shannon Entropy
     % - [X] Kolmogorov-Smirnov Test Value

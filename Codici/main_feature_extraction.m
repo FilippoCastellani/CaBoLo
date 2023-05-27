@@ -21,7 +21,7 @@ header = {  'patient_id',  ...
             'QRS_duration', 'PR_duration', 'QT_duration', 'QS_duration', 'ST_duration', 'P_amplitude', 'Q_amplitude', 'R_amplitude', 'S_amplitude', 'T_amplitude', ...
             'AFEv', 'Radius', 'ShannonEntropy', 'KSTestValue', ...
             'median_RRinterval', 'ifa_index_ratio', ...
-            'QRS_similarity', 'R_similarity', 'HighBeats_similarity', 'SQindex', 'label' };
+            'QRS_similarity', 'R_similarity', 'HighBeats_similarity', 'SQindex', 'noisy', 'label' };
             
 % Write the header on the csv file
 fid = fopen(filename,'w');
@@ -37,7 +37,7 @@ verbose = 0;
 % Define for the inversion check
 ptg = 0.7; % threshold as 70% of the max oscillation
 
-for i= 41:N
+for i= 1043:N
     disp(['Processing patient ', num2str(i), ' of ', num2str(N)]);
     file = [DatasetFolderPrefix train_patients{i}];
     disp(file);
@@ -50,9 +50,9 @@ for i= 41:N
     [ecg_checked, inverted] = correct_if_inverted(ecg_cleaned, ptg, time_axis, verbose);
 
     % (2) Feature vector extraction on the processed signal
-    [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector] = feature_extraction(ecg_checked, Fs, time_axis, verbose);  
+    [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy] = feature_extraction(ecg_checked, Fs, time_axis, verbose);  
 
-    feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector];
+    feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy];
 
     % (3) Write on file the feature vector
     fid = fopen(filename,'a');
