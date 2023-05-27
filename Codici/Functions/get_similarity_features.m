@@ -13,7 +13,9 @@ function [QRS_similarity, R_similarity, Ratio_HBS, SQindex] = get_similarity_fea
 
 % ecg: ECG recording
 % fs: sampling frequency
+% t: time axis for visualization
 % Rpeak_index: R peaks detection with Pan-Tompkin's algorithm
+% visuals: flag for visualization
 
 %%
 
@@ -73,6 +75,7 @@ SQindex_vector = zeros(length(P_onset)-1, 1);
 
 % Signal Qualify of each beat computed as the difference between the
 % current P-wave onset amplitude and the previous T-wave offset amplitude
+
 for i = 2:(length(P_onset)-1)
     SQindex_vector(i) = ecg(P_onset(i))-ecg(T_offset(i-1));
 end
