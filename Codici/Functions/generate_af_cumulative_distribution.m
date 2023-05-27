@@ -22,7 +22,7 @@ function generate_af_cumulative_distribution(dataset_folder, patient_limiter, vi
     % 1) Load the AF samples from the dataset folder cicling over each patient
     
     % Open the reference file containing the labels and the names of the patients
-    reference_filepath = dataset_folder + "REFERENCE.csv";
+    reference_filepath = dataset_folder + "AF_distribution_patients_reference.csv";
     fid = fopen(reference_filepath, 'r');
     % read the file
     reference = textscan(fid, '%s %s', 'Delimiter', ',');
@@ -65,16 +65,18 @@ function generate_af_cumulative_distribution(dataset_folder, patient_limiter, vi
     if (visuals)
         % EXTRA STEP: Plot the cumulative distributions of the AF values for each patient
         % Cycle over the patients
+        % plot has the legend of patient number
         figure
         for i = 1:num_patients
             % Plot the cumulative distribution
-            plot(AF_values_arrays{i}, AF_cumulative_distributions{i})
+            plot(AF_values_arrays{i}, AF_cumulative_distributions{i}, 'DisplayName', ['Patient #: ' num2str(i)]);
             hold on
             xlabel('AF values')
             ylabel('Cumulative distribution')
             title('Cumulative distribution of the AF values')
             grid on
         end
+        legend('A00004', 'A00725', 'A06213', 'A06911', 'A07666', 'A07927', 'A08227', 'A08012', 'A04815');
     end
 
     % 5) Fit a sigmoidal curve over all cumulative distributions saved in the cell array

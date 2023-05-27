@@ -78,7 +78,8 @@ clc;close all;clear;
     
 %% Generate Atrial Fibrillation Cumulative Distribution
 
-generate_af_cumulative_distribution(DatasetFolderPrefix, 8, true)
+AF_Distribution_Folder =  'Dataset/AF_Distribution_Patients/';
+generate_af_cumulative_distribution(AF_Distribution_Folder, -1, true)
 
 %% Loading data
 % Let's pick a patient
