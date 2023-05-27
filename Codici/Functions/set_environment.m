@@ -1,4 +1,4 @@
-function [PROJECT_DIRECTORY, DatasetFolderPath] = set_environment();
+function [PROJECT_DIRECTORY, DatasetFolderPath, DatasetFolderPrefix] = set_environment();
     if(getenv('COMPUTERNAME')=="FILIPPO") % se sei sul computer di filippo
         PROJECT_DIRECTORY = 'E:/ProgettiGithub/CaBoLo/Codici/';
         cd(PROJECT_DIRECTORY);

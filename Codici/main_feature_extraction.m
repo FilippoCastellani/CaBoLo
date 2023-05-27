@@ -4,7 +4,7 @@
 clc; close all; clear;
 
 % Setting the environment
-[PROJECT_DIRECTORY, DatasetFolderPath] = set_environment();
+[PROJECT_DIRECTORY, DatasetFolderPath,DatasetFolderPrefix] = set_environment();
 
 %% Extract test filenames 
 
@@ -20,7 +20,7 @@ filename = ['features_' datestr(now,'dd-mm-yyyy_HH-MM-SS') '.csv'];
 header = {  'patient_id',  ...
             'QRS_duration', 'PR_duration', 'QT_duration', 'QS_duration', 'ST_duration', 'P_amplitude', 'Q_amplitude', 'R_amplitude', 'S_amplitude', 'T_amplitude', ...
             'AFEv', 'Radius', 'ShannonEntropy', 'KSTestValue', ...
-            'median_RRinterval', 'ifa_index', ...
+            'median_RRinterval', 'ifa_index_ratio', ...
             'QRS_similarity', 'R_similarity', 'HighBeats_similarity', 'SQindex' };
             
 % Write the header on the csv file
@@ -37,8 +37,10 @@ verbose = 0;
 % Define for the inversion check
 ptg = 0.7; % threshold as 70% of the max oscillation
 
-for i= 1:N
-    disp('Processing patient', i, 'of', N);
+for i= 1:20 %1:N
+    disp(['Processing patient ', num2str(i), ' of ', num2str(N)]);
+    file = [DatasetFolderPrefix train_patients{i}];
+    disp(file);
     [ecg, Fs, time_axis] = load_patient([DatasetFolderPrefix train_patients{i}]);
 
     % (1.1) Filtering
@@ -48,7 +50,7 @@ for i= 1:N
     [ecg_checked, inverted] = correct_if_inverted(ecg_cleaned, ptg, time_axis, verbose);
 
     % (2) Feature vector extraction on the processed signal
-    [morphological_feature_vector, AF_features, RR_features] = feature_extraction(ecg_checked, Fs, time_axis, verbose);  
+    [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector] = feature_extraction(ecg_checked, Fs, time_axis, verbose);  
 
     feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector];
 

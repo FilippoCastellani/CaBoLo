@@ -6,5 +6,7 @@ function fileNames = get_filenames(reference_filepath)
     
     % Extract the file names
     fileNames = data.FileName; 
+    % Get rid of the first row (header)
+    fileNames = fileNames(2:end);
 
 end 

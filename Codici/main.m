@@ -83,7 +83,7 @@ generate_af_cumulative_distribution(AF_Distribution_Folder, -1, true)
 
 %% Loading data
 % Let's pick a patient
-SelectedPatient='A00006';
+SelectedPatient='A00020';
 
 SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
@@ -95,7 +95,7 @@ SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
 %% Preprocessing 
 ecg = signal;
-verbose= 1;
+verbose= 0;
 
 % (1.1) Filtering
 ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose); 
@@ -108,10 +108,8 @@ ptg = 0.7; % define the threshold as 70% of the max oscillation
 
 % (2) Feature vector extraction on the processed signal
 verbose=1;
-[morphological_feature_vector, AF_features, RR_features, similarity_feature_vector] = feature_extraction(ecg_checked, Fs, time_axis, verbose);     
-%%
-
-tot_features = horzcat(morphological_feature_vector, AF_features, RR_features, similarity_feature_vector);
+[morphological_feature_vector, AF_features, RR_features, similarity_feature_vector] = feature_extraction(ecg_checked, Fs, time_axis, verbose);    
+feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector];
 
 %%
 %ecgpuwave

@@ -14,7 +14,7 @@ function morphological_feature_vector = get_morphological_features(ecg, fs, t, v
 	%	- [X] T Amplitude                 FEATURE 10
 
     % the final morphological_feature_vector is the row vector: 
-    [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset]= get_fiducial_points(ecg, Rpeak_index, fs);
+    [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset]= get_fiducial_points(ecg, Rpeak_index, fs, t);
    
     if visuals
         figure;

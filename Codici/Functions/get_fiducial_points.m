@@ -1,4 +1,4 @@
-function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset]= get_fiducial_points(ecg, Rpeak_index, fs)
+function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, R_peak, QRS_onset, QRS_offset]= get_fiducial_points(ecg, Rpeak_index, fs, t)
     % This function takes as input the ecg signal of interested already
     % filtered, the relative sampling frequency and the already identified R peaks
     % and returns the locations (in samples) of the fiducial points: 
