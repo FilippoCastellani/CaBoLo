@@ -93,11 +93,17 @@ function generate_af_cumulative_distribution(dataset_folder, patient_limiter, vi
     xdata= AF_values_all';
     ydata= AF_cumulative_distributions_all';
     
+    % Define the function to be fitted
     fun = @(p,xdata) p(1) ./ ( 1 + exp(-1*p(2)*(xdata-p(3))) );
+    % Define the initial parameters (initial guess)
     p0 = [1, 1, 0.5];
     
+    % Fit the function
     p = lsqcurvefit(fun,p0,xdata,ydata);
+
+    % Generate linearly spaced array of values to plot the fitted function
     times = linspace(min(xdata),max(xdata));
+    % Plot the fitted function by using the fitted parameters and the the fun function
     plot(xdata,ydata,'ko',times,fun(p,times),'b-')
     
     % 6) Plot the fitted cumulative distribution
@@ -107,7 +113,7 @@ function generate_af_cumulative_distribution(dataset_folder, patient_limiter, vi
     grid on
     hold off
 
-    %7) Save the fitted curve
+    %7) Save the fitted parameters in a .mat file
     save('fitted_cumulative_distribution_AF.mat', 'p');
 
 end
