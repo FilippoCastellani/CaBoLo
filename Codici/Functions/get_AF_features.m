@@ -80,14 +80,19 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     high_resolution_Y_edge= -Lorenz_Y_boundary:high_resolution_bin_lateral_size:Lorenz_Y_boundary;
     high_resolution_p_hist = flip(hist3([X1' X2'],'ctrs',{high_resolution_X_edge high_resolution_Y_edge}));
 
-    if (visuals) figure(); end
+    % if (visuals) figure(); end
     
     while Radius < Lorenz_X_boundary
         Radius = Radius + high_resolution_bin_lateral_size;
         [x,y] = meshgrid(-Lorenz_X_boundary:high_resolution_bin_lateral_size:Lorenz_X_boundary);
         mask = x.^2 + y.^2 <= Radius^2;
         % mask = mask(1:end-1,1:end-1);
-        if(visuals) image(mask*255); end
+        if(visuals) 
+            image(mask*255); 
+            title('Mask enclosing 60% of the points')
+            xlabel('RR_{n} (ms)')
+            ylabel('RR_{n+1} (ms)')
+        end
 
         % calculate the percentage of points that are inside the circle
         points_inside_circle = sum(sum(mask.*high_resolution_p_hist));
