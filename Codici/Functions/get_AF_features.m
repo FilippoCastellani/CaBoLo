@@ -59,7 +59,8 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     
     % Compute AFEv
     drr_series_seconds = drr_series / 1000; % in seconds
-    [OriginCount,IrrEv,PACEv] = get_AFEv_metrics(drr_series_seconds',X_edge*(1/1000),1, visuals);
+    debug=0;
+    [OriginCount,IrrEv,PACEv] = get_AFEv_metrics(drr_series_seconds',X_edge*(1/1000),debug, visuals);
 
     AFEv = IrrEv - OriginCount - 2*PACEv;
     
@@ -230,7 +231,7 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     D = D / 100;
 
     % if visualisation is required, plot the two curves and also their distance
-    if(true)
+    if(visuals)
         figure()
         plot(RR_RR_values,AF_curve_evaluation)
         hold on
