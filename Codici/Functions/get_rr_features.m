@@ -1,4 +1,4 @@
-function [median_RRinterval, ifa_index] = get_rr_features(ecg,fs,t, Rpeak_index,visuals)
+function [median_RRinterval, ratio_of_ifa_index] = get_rr_features(ecg,fs,t, Rpeak_index,visuals)
     % This functions calculates the RR-interval related features of the ECG
     % signal
     
@@ -74,5 +74,7 @@ for i = 1:length(rr_serie) - 2
         ifa_index(i) = ifa_index(i) + 1;
     end
 end
+
+ratio_of_ifa_index = (length(ifa_index(ifa_index ~= 0)))/length(ifa_index);
 
 end
