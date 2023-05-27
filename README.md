@@ -21,7 +21,7 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 	 - [x] Data exploration è stata già fatta da physionet quando ha pubblicato la challenge (vedi sopra Challenge Data)
  - [ ] Definizione di una pipeline di processing che sia ad hoc per ogni paziente
 	 - [ ] Pre-processing:
-		 - [ ] Check for possible direction inversion of recording #TO_UNDERSTAND 
+		 - [x] Check for possible direction inversion of recording 
 		 - [ ] Electronic noise filtering
 			 - [x] Noise was removed by low-pass filtering @ 50 Hz
 			 - [ ] Ma a che frequenza era davvero il noise ?

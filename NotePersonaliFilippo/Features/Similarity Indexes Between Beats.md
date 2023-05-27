@@ -11,7 +11,7 @@ This value is considered the Similarity index for QRS pulses.
 
 > [!TODO] Personal opinion
 > Before cross-correlation i would do signal normalization 
-> WE DID RESCALING BETWEEN -1 and +1 in order to consider only morphology of signal, not it's scale.
+> WE DID RESCALING BETWEEN 0 and +1 in order to consider only morphology of signal, not it's scale.
 
 ## Similarity index of R amplitude (F41)
 Like similarity index of QRS, we computed the similarity index of R amplitude from the correlation between consecutive R amplitudes. As for the QRS, we extracted the maximum correlation value for each of the R amplitude pairs, and then we computed the mean, obtaining the R amplitude similarity index.
@@ -28,15 +28,10 @@ For the computation of this feature, we considered the previous two similarity i
 - To obtain the ratio of high similarity beats, the total amount of high similarity beats was divided by the total number of beats.
 
 
->[!warning] Doubt:
->Io non penso che se si chiama ratio allora non sia diviso il numero totale di beats, piuttosto penso che sia un rapporto tra le due misure
->#TO_UNDERSTAND 
-
-
 ## Signal Qualify index (F43)
 
 This feature was computed as the difference between the amplitude of the P wave onset of the current beat, and the amplitude of the T wave offset of the previous beat. It quantifies the fluctuation of the isoelectric level.
 
 >[!important] IMPORTANT:
 >ma nel senso che bisogna computarne uno per ogni beat e poi fare la media statistica ??
->SI ESATTO
+>SI ESATTO, CIOè IN REALTà è la VARIANZA VISTO CHE LA MEDIA VIENE TIPO ZERO
