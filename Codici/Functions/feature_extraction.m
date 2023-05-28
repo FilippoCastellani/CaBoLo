@@ -10,44 +10,57 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
 
     % R peaks detection with Pan-Tompkin's algorithm
     [~, Rpeak_index, ~]= pan_tompkin(ecg,fs,0);
+    
+    noisy = 0;
 
-    %% Check RR above physiological limits refractory period)
-    RR = diff(Rpeak_index)/fs; % RR time series [s]
+    %% Check RR above physiological limits (refractory period)
     refractory_period = 0.2; % refractory period [s] = 200 ms
+    
+    RR = diff(Rpeak_index)/fs; % RR time series [s]
     RR(RR<refractory_period) = NaN; % set RR below refractory period to NaN
     invalid_RR = find(isnan(RR)); % identify invalid RR intervals
-
-    noisy = 0;
     
     % if more than 60% of the RR intervals result to be invalid, it is
     % deemed unfit for classification
     if length(invalid_RR) > 0.6*length(RR)
-        noisy = true;
+        noisy = 1;
     end 
     
-    %%  QUESTO VA CORRETTO !!!!
-    for i = 1:length(invalid_RR)
-        i_RR = invalid_RR(i);
-        peak_1 = Rpeak_index(i_RR);
-        peak_2 = Rpeak_index(i_RR+1);
+    R_peaks = Rpeak_index;
+    while (~isempty(invalid_RR) && ~noisy)
+        disp('...checking for invalid RR...')
 
-        [~, index] = min([ecg(peak_1),ecg(peak_2)]); % find the minimum between the two peaks
-        if index == 1
-            Rpeak_index(i_RR) = NaN; % set invalid R peaks to NaN
-        else
-            Rpeak_index(i_RR+1) = NaN; % set invalid R peaks to NaN
+        for i = 1:length(invalid_RR)
+            i_RR = invalid_RR(i);
+            peak_1 = Rpeak_index(i_RR);
+            peak_2 = Rpeak_index(i_RR+1);
+    
+            [~, index] = min([ecg(peak_1),ecg(peak_2)]); % find the minimum between the two peaks
+            if index == 1
+                R_peaks(i_RR) = NaN; % set invalid R peaks to NaN
+            else
+                R_peaks(i_RR+1) = NaN; % set invalid R peaks to NaN
+            end
         end
+
+        % drop nan values from Rpeak_index
+        R_peaks = R_peaks(~isnan(R_peaks));
+
+        % Compute again the RR intervals and re-check
+        RR = diff(R_peaks)/fs; % RR time series [s]
+        RR(RR<refractory_period) = NaN; % set RR below refractory period to NaN
+        invalid_RR = find(isnan(RR)); % identify invalid RR intervals
+        Rpeak_index = R_peaks;
     end
-
-    % drop nan values from Rpeak_index
-    Rpeak_index = Rpeak_index(~isnan(Rpeak_index));
-
+    
     % Set as too noisy to be analyzed signals with less than a minimum
     % number of beats recognized
     min_peaks = 5;
-    if length(Rpeak_index) < min_peaks
+    if length(R_peaks) < min_peaks
         noisy= 1;
     end
+
+    disp(var(ecg(R_peaks)));
 
     if (~noisy)
 
@@ -72,12 +85,6 @@ function [morphological_feature_vector, AF_feature_vector, RR_feature_vector, si
         similarity_feature_vector = NaN(1, 4);
         AF_feature_vector = NaN(1, 4);
     end 
-
-
-    if visuals
-        figure; tlim = [0 10]; amplim= [-1 2];
-        hold on; plot(t, ecg); scatter(Rpeak_index,ecg(Rpeak_index),'m'); hold off; ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
-        title('QRS on Filtered Signal');
-    end 
+ 
 
 end 

@@ -80,8 +80,6 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     high_resolution_X_edge= -Lorenz_X_boundary:high_resolution_bin_lateral_size:Lorenz_X_boundary;
     high_resolution_Y_edge= -Lorenz_Y_boundary:high_resolution_bin_lateral_size:Lorenz_Y_boundary;
     high_resolution_p_hist = flip(hist3([X1' X2'],'ctrs',{high_resolution_X_edge high_resolution_Y_edge}));
-
-    % if (visuals) figure(); end
     
     while Radius < Lorenz_X_boundary
         Radius = Radius + high_resolution_bin_lateral_size;
@@ -147,12 +145,17 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
 
     ShannonEntropy=0;
 
+    % To obtain a reasonably accurate measure of the SE, at least 16 such bins are required. 
     num_bins = 16;
 
     % First we need to compute the histogram of the RR intervals
     % Outliers are removed
-    tail_percentage = 5; % This value was chosen empirically AVVERTI CHIARA E NELLY
+    tail_percentage = 5; % This value was chosen empirically 
     rr_series_no_outliers = rr_series(rr_series > prctile(rr_series, tail_percentage) & rr_series < prctile(rr_series, 100 - tail_percentage));
+
+    if isempty(rr_series_no_outliers)
+        rr_series_no_outliers = rr_series;
+    end 
 
     if (visuals)
         figure()

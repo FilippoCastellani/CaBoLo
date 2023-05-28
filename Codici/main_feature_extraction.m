@@ -30,6 +30,7 @@ fprintf(fid,'%s\n',header{1,end});
 fclose(fid); 
 
 %% Get data
+filename = 'features_27-05-2023_14-58-35.csv';
 
 N = length(train_patients);
 verbose = 0;
@@ -37,7 +38,7 @@ verbose = 0;
 % Define for the inversion check
 ptg = 0.7; % threshold as 70% of the max oscillation
 
-for i= 1043:N
+for i= 2873:N
     disp(['Processing patient ', num2str(i), ' of ', num2str(N)]);
     file = [DatasetFolderPrefix train_patients{i}];
     disp(file);
@@ -53,6 +54,8 @@ for i= 1043:N
     [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy] = feature_extraction(ecg_checked, Fs, time_axis, verbose);  
 
     feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy];
+
+    disp(['Noisy: ', num2str(noisy)])
 
     % (3) Write on file the feature vector
     fid = fopen(filename,'a');

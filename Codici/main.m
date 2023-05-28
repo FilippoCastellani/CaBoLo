@@ -91,7 +91,7 @@ generate_af_cumulative_distribution(AF_Distribution_Folder, -1, true)
 
 %% Loading data
 % Let's pick a patient
-SelectedPatient='A01330';
+SelectedPatient='A02345';
 
 SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 

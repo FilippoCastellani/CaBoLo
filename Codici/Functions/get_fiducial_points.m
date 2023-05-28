@@ -75,6 +75,7 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
         [start_t_window, ~, t_window] = window(ecg, QRS_offset(i), QRS_offset(i)+t_window_length);
         
         % compute the T peak as the maximum value in the T search window
+        
         [~, max_loc_t] = max(t_window); % find the peak
         T_peak(i) = relocate(max_loc_t, start_t_window); % store its location wrt the whole ecg
 
@@ -93,8 +94,13 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
         else 
             filtered_t_window = t_window;
         end
-
-        slope_t_window = diff(filtered_t_window); 
+        
+        % check to have at least to values to compute the slope
+        if length(filtered_t_window)>2
+            slope_t_window = diff(filtered_t_window); 
+        else
+            slope_t_window = filtered_t_window;
+        end 
 
         % Define a threshold for the slope as a percetange of the mean
         % slope respectively on the two sides of the 
@@ -159,7 +165,12 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
             filtered_p_window = p_window;
         end
         
-        slope_p_window = diff(filtered_p_window); 
+        % check to have at least to values to compute the slope
+        if length(filtered_p_window)>2
+            slope_p_window = diff(filtered_p_window); 
+        else
+            slope_p_window = filtered_p_window;
+        end 
 
         % Define a threshold for the slope as a percetange of the mean
         % slope respectively on the two sides of the 
