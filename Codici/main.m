@@ -103,7 +103,7 @@ SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
 %% Preprocessing 
 ecg = signal;
-verbose= 0;
+verbose= 1;
 
 % (1.1) Filtering
 ecg_cleaned = preprocessing(ecg, Fs, time_axis, verbose); 

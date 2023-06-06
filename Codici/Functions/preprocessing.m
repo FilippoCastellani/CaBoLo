@@ -9,28 +9,42 @@ function [y,b,a] = preprocessing(ecg, fs, t, visuals)
     % Output: y: the filtered signal
     %         b: the numerator coefficients of the filter
     %         a: the denominator coefficients of the filter
-
-    fn = fs/2;
-    n= 3;                %filter order
-    fcutlow= 1.5;           %low cut frequency in Hz
-    fcuthigh= 50;         %high cut frequency in Hz
-    Wn = [fcutlow fcuthigh]/fn; % normlized passband
     
-    [b,a] = butter(n,Wn,'bandpass');
+    % Define the passband frequency range
+    passbandLow = 1.5; % Hz
+    passbandHigh = 50; % Hz
+    Wn = [passbandLow, passbandHigh]/(fs/2); % normlized passband
+    filterOrder = 3;
 
+    % Design the Butterworth filter
+    [b, a] = butter(filterOrder, Wn);
+
+    % Apply the filter to the ECG signal
     % filt filt is used to avoid phase distortion and hence to preserve the morphology of the signal
-    bpfecg = filtfilt(b,a,ecg)'; %bandpass filtered ecg
-
-    y = bpfecg;
+    filteredECG = filtfilt(b, a, ecg);
+    
+    % Return a row vector
+    y = filteredECG';
     
     % visuals
     if (visuals)
-        figure; 
-        [H,w] = freqz(b,a,n);
+
+        % Initialize the figure
+        figure;
+        hold on;
+        
         tlim = [0 10]; amplim= [-1 2];
+
+        % Compute the frequency response of the filter
+        [H, f] = freqz(b, a, length(ecg), fs);
+
         subplot(3,1,1); plot(t,ecg);  ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim); ylim(amplim);
-        subplot(3,1,2); hold on; plot(t,bpfecg); hold off; legend([strcat("bandpass (", num2str(fcutlow), " , ",num2str(fcuthigh) ,")")]); ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim);
-        subplot(3,1,3); plot((w/pi)*fn,20*log10(abs(H))); ylabel('Power'); xlabel('Frequency');
-        title('IIR Bandpass ECG Filtering');
+        title('Original ECG Signal');
+        subplot(3,1,2); hold on; plot(t,filteredECG); hold off; legend([strcat("bandpass (", num2str(passbandLow), " , ",num2str(passbandHigh) ,")")]); ylabel('Amplitude (mV)'); xlabel('Time (s)'); xlim(tlim);
+        title(sprintf('Filtered ECG Signal (Order: %d)', filterOrder));
+        subplot(3,1,3); plot(f, abs(H)); ylabel('Magnitude'); xlabel('Frequency (Hz)');
+        title('Magnitude Response');
+        
+
     end 
 end 

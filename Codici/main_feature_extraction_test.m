@@ -30,7 +30,6 @@ fprintf(fid,'%s\n',header{1,end});
 fclose(fid); 
 
 %% Get data
-filename = 'test_features_02-06-2023_12-46-45.csv';
 
 N = length(train_patients);
 verbose = 0;
