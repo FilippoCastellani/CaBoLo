@@ -215,7 +215,7 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     fun = @(p,xdata) p(1) ./ ( 1 + exp(-1*p(2)*(xdata-p(3))) );
     
     % load the distribution parameters from the file 'fitted_cumulative_distribution_AF.mat'
-    AF_distribution = load('fitted_cumulative_distribution_AF.mat');
+    AF_distribution = load('Data/fitted_cumulative_distribution_AF.mat');
     Af_distribution_curve = AF_distribution.p;
     
     [RR_RR_cumulative_distribution,RR_RR_values] = get_cumulative_distribution_from_signal(ecg, fs, t);
