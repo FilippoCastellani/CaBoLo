@@ -6,15 +6,30 @@ clc; close all; clear;
 % Setting the environment
 [PROJECT_DIRECTORY, DatasetFolderPath,DatasetFolderPrefix] = set_environment();
 
-%% Extract test filenames 
+%% Set what you want to run 
+extract_train = 0;
+extract_test = 1;
 
-reference_filepath = [PROJECT_DIRECTORY '/train_data.csv'];
+%% Extract train filenames 
+if (extract_train)
+    reference_filepath = [PROJECT_DIRECTORY 'Data/train_data.csv'];
+
+    % Define the csv filename using the date and time
+    filename = ['Data/train_features_' datestr(now,'dd-mm-yyyy_HH-MM-SS') '.csv'];
+
+elseif (extract_test)
+    reference_filepath = [PROJECT_DIRECTORY 'Data/test_data.csv'];
+
+    % Define the csv filename using the date and time
+    filename = ['Data/test_features_' datestr(now,'dd-mm-yyyy_HH-MM-SS') '.csv'];
+
+else 
+    disp("Set to 1 either the train or the test feature extraction");
+end 
+
 [train_patients, labels] = get_filenames(reference_filepath);
 
 %% Create the csv file to write the features
-
-% Define the csv filename using the date and time
-filename = ['features_' datestr(now,'dd-mm-yyyy_HH-MM-SS') '.csv'];
 
 % Define the header of the csv file
 header = {  'patient_id',  ...
@@ -30,15 +45,20 @@ fprintf(fid,'%s\n',header{1,end});
 fclose(fid); 
 
 %% Get data
-filename = 'features_27-05-2023_14-58-35.csv';
+
+% if you want to continue a previous extraction set here the csv file were
+% to write and properly set the start of the cycle to the first
+% sample to be processed
+% filename = 'features_27-05-2023_14-58-35.csv';
 
 N = length(train_patients);
 verbose = 0;
+start = 1;
 
 % Define for the inversion check
 ptg = 0.7; % threshold as 70% of the max oscillation
 
-for i= 4819:N
+for i= start:N
     disp(['Processing patient ', num2str(i), ' of ', num2str(N)]);
     file = [DatasetFolderPrefix train_patients{i}];
     disp(file);
