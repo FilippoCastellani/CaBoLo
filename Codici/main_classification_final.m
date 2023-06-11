@@ -151,7 +151,7 @@ end
 
 % save the results in a .mat file
 file_name = ['Results/Adaboost_' datestr(now,'yyyy_mm_dd_HH_MM_SS') '.mat'];
-save(file_name, 'model', 'best_accuracy', 'confusion_matrix', 'weak_learners_values', 'accuracy', 'idx');
+save(file_name, 'model', 'best_accuracy', 'confusion_matrix', 'weak_learners_values', 'accuracy_storage', 'idx');
 
 %% After importing the model again from the .mat file, we can use it to predict the labels of the test set
 
