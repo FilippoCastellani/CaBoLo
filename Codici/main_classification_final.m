@@ -37,9 +37,9 @@ X_TEST.patient_id = [];
 % adaboost classifier, and will find the optimal number of weak learners, 
 % which will be obtained using a 100 fold cross validation.
 
-% ACTUALLY: we will use the fitcensemble function, which is the same as
-% fitensemble but for classification problems (as in our case):
-
+% ACTUALLY: we will use the fitcensemble function, which is a simpler
+% version of fitensemble but specific for classification problems.
+%
 % Description of fitensemble from Matlab documentation:
 % fitensemble can boost or bag decision tree learners or discriminant analysis classifiers. 
 % The function can also train random subspace ensembles of KNN or discriminant analysis classifiers.
@@ -52,24 +52,28 @@ X_TEST.patient_id = [];
 % Matlab reference documentation: 
 
 % NumLearningCycles:
-% - Number of ensemble learning cycles, specified as the comma-separated pair consisting of 'NumLearningCycles' and a positive integer or 'AllPredictorCombinations'.
+% - Number of ensemble learning cycles, specified as the comma-separated pair 
+% consisting of 'NumLearningCycles' and a positive integer or 'AllPredictorCombinations'.
 % If you specify a positive integer, then, at every learning cycle, 
 % the software trains one weak learner for every template object in Learners (which by default is 1).
 % Consequently, the software trains NumLearningCycles*numel(Learners) learners. (which means that if we specify 100, we will have 100 weak learners)
 
 % We will use the 'AdaBoostM2' method
 
+% NOTE PER ME:
 
-DEBUGGING = 1;
+% METTERE AX LIM TRA 0.5 ed 1 CORINO DOCET
+
+DEBUGGING = 0;
 visuals= 1;
 
 if DEBUGGING
     clc;
-    k = 5;
-    weak_learners_values = [20 80 200];
+    k = 10;
+    weak_learners_values = [10 50 100];
 else
     k = 100;
-    weak_learners_values = [90 120 200 300];
+    weak_learners_values = [  40 100 300];
 end
 
 cv = cvpartition(Y_TRAIN{:,1}, 'KFold', k, 'Stratify', true);
@@ -136,12 +140,13 @@ if visuals
     % Classes are contained in model.ClassNames property.
 
     figure;
-    confusionchart(confusion_matrix, model.ClassNames);
-    title('Confusion Matrix');
+    confusionchart(confusion_matrix, model.ClassNames, 'Normalization', 'row-normalized');
+    title(['Confusion Matrix obtained using: ' num2str(weak_learners_values(idx)) ' weak learners']);
 
     % plot the accuracy for each k-fold
     figure;
     plot(weak_learners_values, accuracy_storage, 'LineWidth', 2);
+    yline(best_accuracy, '--');
     title('Accuracy for each k-fold');
     xlabel('Number of weak learners');
     ylabel('Accuracy');
