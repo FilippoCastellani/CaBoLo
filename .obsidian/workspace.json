@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "0e92d611ac374f4a",
+        "id": "63fe4301518bf2f0",
         "type": "tabs",
         "children": [
           {
-            "id": "5e0af0901570db7a",
+            "id": "8d33459a59dfa3c1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -93,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +105,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,9 +126,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "NotePersonaliFilippo/Features/Index for Arrhythmia.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -154,28 +146,29 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5e0af0901570db7a",
+  "active": "8d33459a59dfa3c1",
   "lastOpenFiles": [
-    "Codici/Dataset/AF_Distribution_Patients/figure_distribution.jpg",
-    "Codici/Dataset/AF_Distribution_Patients/figure_distribution.fig",
-    "Codici/Dataset/AF_Distribution_Patients/figure.pdf",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.mat",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.trigger",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.hea-",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.hea",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.rec",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.edf",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.atr",
-    "Codici/WFDB_Toolbox/database/Dataset/AF_Distribution_Patients/A04815.dat",
     "README.md",
+    "NotePersonaliFilippo/Features/Random Forests.md",
+    "Codici/main_classification_reloaded.asv",
+    "Codici/main_classification_reloaded.m",
+    "Codici/main_classification.asv",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00055.mat",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00055.trigger",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00055.hea-",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00055.hea",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00055.rec",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00055.edf",
+    "Codici/WFDB_Toolbox/database/Dataset/training2017/A00055.atr",
+    "NotePersonaliFilippo/Features/AFEv.md",
+    "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
+    "Codici/Dataset/AF_Distribution_Patients/figure_distribution.jpg",
     "NotePersonaliFilippo/Features/Shannon Entropy.md",
     "NotePersonaliFilippo/Features/Similarity Indexes Between Beats.md",
     "doubts.md",
     "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
     "ECGPUWAVE Note.md",
-    "NotePersonaliFilippo/Features/AFEv.md",
     "Grafici per capire i fiducial point.jpeg",
-    "NotePersonaliFilippo/Features/Index for Arrhythmia.md",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230501165733.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420185519.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420181933.png",
@@ -184,7 +177,6 @@
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162754.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420155929.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420155637.png",
-    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230419110839.png",
-    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230419105549.png"
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230419110839.png"
   ]
 }
