@@ -12,17 +12,27 @@ clc; close all; clear;
 
 DATASET_TRAIN = readtable('Data/train_features_complete.csv');
 
+% drop the rows containing NaN values
+DATASET_TRAIN = rmmissing(DATASET_TRAIN);
+% drop the column named 'noisy'
+DATASET_TRAIN.noisy = [];
+
 X_TRAIN = DATASET_TRAIN(:, 1:end-1);
 Y_TRAIN = DATASET_TRAIN(:, end);
 
 DATASET_TEST = readtable('Data/test_features_complete.csv');
+
+% drop the rows containing NaN values
+DATASET_TEST = rmmissing(DATASET_TEST);
+% drop the column named 'noisy'
+DATASET_TEST.noisy = [];
+
 X_TEST = DATASET_TEST(:, 1:end-1);
 Y_TEST = DATASET_TEST(:, end);
 
 % drop the patient_id column as it is not needed and it is not a feature + would cause issues
 X_TRAIN.patient_id = [];
 X_TEST.patient_id = [];
-
 
 %%
 
@@ -60,11 +70,8 @@ X_TEST.patient_id = [];
 
 % We will use the 'AdaBoostM2' method
 
-% NOTE PER ME:
-
-% METTERE AX LIM TRA 0.5 ed 1 CORINO DOCET
-
 %% Setting the values of weak learners to try along with the k number of folds value
+
 DEBUGGING = 0;
 visuals= 1;
 
@@ -77,6 +84,7 @@ if DEBUGGING
 else
     k = 100;
     weak_learners_values = [20 40 100 300];
+    weak_learners_values = [300];
 end
 
 %% Performing the training
@@ -142,7 +150,6 @@ best_accuracy = sum(char(Y_PREDICTED) == char(Y_TEST.label)) / length(Y_TEST.lab
 confusion_matrix = confusionmat(Y_TEST{:,1}, Y_PREDICTED);
 
 %% Visuals
-
 if visuals
     % plot the confusion matrix
     % Classes are contained in model.ClassNames property.
@@ -178,6 +185,3 @@ Y_PREDICTED = predict(model, X_TEST);
 
 % calculate the accuracy
 accuracy_of_imported_model = sum(char(Y_PREDICTED) == char(Y_TEST.label)) / length(Y_TEST.label);
-
-
-
