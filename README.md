@@ -76,25 +76,22 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 				 - [ ] DOUBT: vedi all'interno della nota
 			 - [ ] [[Similarity Indexes Between Beats#Signal Qualify index (F43)|Signal Qualify index]]
 				 - [ ] DOUBT: vedi all'interno della nota
- - [ ] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
- - [ ] Realizzazione della funzione che mette in pratica la pipeline
- - [ ] Costituzione di una matrice che divenga il dataset per il training del modello
+ - [x] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
+ - [x] Realizzazione della funzione che mette in pratica la pipeline
+ - [x] Costituzione di una matrice che divenga il dataset per il training del modello
 
 ![[Pasted image 20230419094805.png|300]] ![[Pasted image 20230419105549.png|300]]
 ## Pt. 2 Schedule
 
-- [ ] Separazione del training set in 3: Training, Validation e Test
-- [ ] Training dei vari modelli
-- [ ] Confrontiamo con i risultati del paper dei cinesi (Random Forest)
+- [x] Separazione del training set in 3: Training, Validation e Test
+- [x] Training dei vari modelli
+- [x] Confrontiamo con i risultati del paper dei cinesi (Random Forest)
 - [ ] FESTEGGIARE ! ✨🍾🎉
 
 
 > [!Warning] Dubbi:
 >  - Poincarè / Lorenz plot
-> 	 - ![[Pasted image 20230419110839.png|800]]
->  - 
->  - 
-> 
+> 	 - SONO DIVERSI ED è SPIEGATO QUI https://www.politesi.polimi.it/bitstream/10589/11597/1/2010_12_Zanini.pdf
 
 
 # Bibliography
