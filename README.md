@@ -37,7 +37,7 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 			 - [x] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing (CONFERMATO)
 	 - [ ] Feature Extraction
 		 - [ ] Morphological Feature ( * ) = implented on [[ECGPUWAVE Note]]
-			 - [ ] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
+			 - [x] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
 			 - [ ] ![QRS1|300](https://upload.wikimedia.org/wikipedia/commons/9/9e/SinusRhythmLabels.svg)
 			 - [ ] ( * ) QRS Duration (Q Onset -> S Offset) 
 				 - [ ] "*QRS duration is measured from the beginning of the Q wave to the end of the S wave. A normal range is from 40 to 100 milliseconds*"
