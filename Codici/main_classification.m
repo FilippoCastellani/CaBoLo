@@ -10,20 +10,21 @@ clc; close all; clear;
 % load the .csv file containing the features matrix along with the labels
 % we need to load both the training and the test data
 
-DATASET_TRAIN = readtable('Data/train_features_complete.csv');
+ENTIRE_DATASET_TRAIN = readtable('Data/train_features_complete.csv');
 
 % drop the rows containing NaN values
-DATASET_TRAIN = rmmissing(DATASET_TRAIN);
+[DATASET_TRAIN, Train_RemovedRows] = rmmissing(ENTIRE_DATASET_TRAIN);
+
 % drop the column named 'noisy'
 DATASET_TRAIN.noisy = [];
 
 X_TRAIN = DATASET_TRAIN(:, 1:end-1);
 Y_TRAIN = DATASET_TRAIN(:, end);
 
-DATASET_TEST = readtable('Data/test_features_complete.csv');
+ENTIRE_DATASET_TEST = readtable('Data/test_features_complete.csv');
 
 % drop the rows containing NaN values
-DATASET_TEST = rmmissing(DATASET_TEST);
+[DATASET_TEST, Test_RemovedRows] = rmmissing(ENTIRE_DATASET_TEST);
 % drop the column named 'noisy'
 DATASET_TEST.noisy = [];
 
@@ -59,8 +60,8 @@ X_TEST.patient_id = [];
 
 % we will use the 'NumLearningCycles' parameter to specify the number of
 % weak learners to use.
-% Matlab reference documentation: 
 
+% Matlab reference documentation: 
 % NumLearningCycles:
 % - Number of ensemble learning cycles, specified as the comma-separated pair 
 % consisting of 'NumLearningCycles' and a positive integer or 'AllPredictorCombinations'.
@@ -80,11 +81,10 @@ visuals= 1;
 if DEBUGGING
     clc;
     k = 8;
-    weak_learners_values = [10 20 50 100 150];
+    weak_learners_values = [10 20 50 100];
 else
     k = 100;
-    weak_learners_values = [20 40 100 300];
-    weak_learners_values = [300];
+    weak_learners_values = [20 40 100 150 200];
 end
 
 %% Performing the training
@@ -132,7 +132,7 @@ for j = 1:length(weak_learners_values)
     end
 end
 
-%% Using results to find the optimal number of weak learners
+% Using results to find the optimal number of weak learners
 [~, idx] = max(mean(accuracy_storage, 1));
 
 
@@ -149,7 +149,7 @@ best_accuracy = sum(char(Y_PREDICTED) == char(Y_TEST.label)) / length(Y_TEST.lab
 % calculate the confusion matrix
 confusion_matrix = confusionmat(Y_TEST{:,1}, Y_PREDICTED);
 
-%% Visuals
+% Visuals
 if visuals
     % plot the confusion matrix
     % Classes are contained in model.ClassNames property.
@@ -172,7 +172,7 @@ if visuals
     ylabel('Accuracy');
 end
 
-%% Save the results
+% Save the results
 
 % save the results in a .mat file
 file_name = ['Results/Adaboost_' datestr(now,'yyyy_mm_dd_HH_MM_SS') '.mat'];
@@ -185,3 +185,61 @@ Y_PREDICTED = predict(model, X_TEST);
 
 % calculate the accuracy
 accuracy_of_imported_model = sum(char(Y_PREDICTED) == char(Y_TEST.label)) / length(Y_TEST.label);
+
+% Now repeat the same procedure: 
+% also taking into account the samples that originally were presenting 1 as 'noisy' value 
+% Conclude by recomputing accuracy and confusion matrix
+
+% recover those samples that have been removed from test
+REMOVED_SAMPLES_TEST = ENTIRE_DATASET_TEST(Test_RemovedRows, :);
+
+% Make a list of prediction for the test set 
+% including the noisy samples added to Y_PREDICTED
+
+PREDICTIONS = [DATASET_TEST.patient_id, Y_PREDICTED];
+
+% we make a cell array long as REMOVED_SAMPLES_TEST and fill it with '~' representing noisy labels
+NOISY_PREDICTED_LABELS = cell(height(REMOVED_SAMPLES_TEST), 1);
+NOISY_PREDICTED_LABELS(:) = {'~'};
+
+NOISY_PREDICTIONS = [REMOVED_SAMPLES_TEST.patient_id, NOISY_PREDICTED_LABELS];
+
+% concatenate the two cell arrays
+ENTIRE_PREDICTIONS = [PREDICTIONS; NOISY_PREDICTIONS];
+
+% sort the rows by patient_id
+ENTIRE_PREDICTIONS = sortrows(ENTIRE_PREDICTIONS, 1);
+% also sort the rows of the test set
+ENTIRE_DATASET_TEST = sortrows(ENTIRE_DATASET_TEST, 1);
+
+% compute the accuracy
+accuracy_of_imported_model_with_noisy_samples = sum(char(ENTIRE_PREDICTIONS{:,2}) == char(ENTIRE_DATASET_TEST.label)) / length(ENTIRE_DATASET_TEST.label);
+
+% compute the confusion matrix
+confusion_matrix_with_noisy_samples = confusionmat(ENTIRE_DATASET_TEST.label, ENTIRE_PREDICTIONS(:,2));
+
+% compute the f1 score
+for i = 1:length(model.ClassNames)
+    tp = confusion_matrix_with_noisy_samples(i,i);
+    fp = sum(confusion_matrix_with_noisy_samples(:,i)) - tp;
+    fn = sum(confusion_matrix_with_noisy_samples(i,:)) - tp;
+    recall = tp / (tp + fn);
+    precision = tp / (tp + fp);
+    f1(i) = 2 * (precision * recall) / (precision+ recall);
+    f1_mean = mean(f1);
+end
+
+disp(['F1 score: ' num2str(f1_mean)]);
+
+% Visuals
+if visuals
+    % plot the confusion matrix
+    % Classes are contained in model.ClassNames property.
+    figure;
+    confusionchart(confusion_matrix_with_noisy_samples, model.ClassNames, 'Normalization', 'row-normalized');
+    title(['Confusion Matrix obtained using: ' num2str(weak_learners_values(idx)) ' weak learners']);
+end
+
+% save the results in a .mat file
+file_name = ['Results/Adaboost_' datestr(now,'yyyy_mm_dd_HH_MM_SS') '_with_noisy_samples.mat'];
+save(file_name, 'model', 'accuracy_of_imported_model_with_noisy_samples', 'ENTIRE_PREDICTIONS', 'ENTIRE_DATASET_TEST', 'f1', 'f1_mean');
