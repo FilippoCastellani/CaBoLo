@@ -32,6 +32,8 @@ median_RRinterval = median(rr_serie);
 ifa_index = zeros(1,length(rr_serie));
 
 % MRR as the average of the five nearest beats
+% this function automatically manges the window at the extremes of the
+% signal backing-off to the available values
 mrr = movmean(rr_serie, [2 2]);
 
 % This feature is based on 4 rules and its value is incremented 
