@@ -218,7 +218,7 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     AF_distribution = load('Data/fitted_cumulative_distribution_AF.mat');
     Af_distribution_curve = AF_distribution.p;
     
-    [RR_RR_cumulative_distribution,RR_RR_values] = get_cumulative_distribution_from_signal(ecg, fs, t);
+    [RR_RR_cumulative_distribution,RR_RR_values] = get_cumulative_distribution_from_signal(rr_series);
 
     % compute the maximum absolute distance between the two curves:
     % - the AF distribution curve
