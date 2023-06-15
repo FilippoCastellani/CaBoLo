@@ -1,6 +1,5 @@
 The K–S test assesses whether two distributions are different from each other by **measuring the maximum value of the absolute difference (D) between two cumulative probability distributions**.
 
-An example of cumulative probability distributions of the standard AF distribution compares with a distribution of test data.
 
 ![[Pasted image 20230420181933.png|250]]
 
@@ -14,6 +13,7 @@ $\lambda = [\sqrt {N_e } + 0.12 + {\frac{0.11} {\sqrt{N_e}}}] * D$
 The $N_e$ is the effective number of data points
 
 $N_e = {{N_1 N_2 }\over {N_1 + N_2}}$
+
 RIMANE SOLO DA CORREGGERE
 ![[Pasted image 20230420185519.png]]
 

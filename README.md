@@ -37,7 +37,7 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 			 - [x] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing (CONFERMATO)
 	 - [ ] Feature Extraction
 		 - [ ] Morphological Feature ( * ) = implented on [[ECGPUWAVE Note]]
-			 - [ ] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
+			 - [x] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
 			 - [ ] ![QRS1|300](https://upload.wikimedia.org/wikipedia/commons/9/9e/SinusRhythmLabels.svg)
 			 - [ ] ( * ) QRS Duration (Q Onset -> S Offset) 
 				 - [ ] "*QRS duration is measured from the beginning of the Q wave to the end of the S wave. A normal range is from 40 to 100 milliseconds*"
@@ -76,25 +76,22 @@ The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 				 - [ ] DOUBT: vedi all'interno della nota
 			 - [ ] [[Similarity Indexes Between Beats#Signal Qualify index (F43)|Signal Qualify index]]
 				 - [ ] DOUBT: vedi all'interno della nota
- - [ ] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
- - [ ] Realizzazione della funzione che mette in pratica la pipeline
- - [ ] Costituzione di una matrice che divenga il dataset per il training del modello
+ - [x] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
+ - [x] Realizzazione della funzione che mette in pratica la pipeline
+ - [x] Costituzione di una matrice che divenga il dataset per il training del modello
 
 ![[Pasted image 20230419094805.png|300]] ![[Pasted image 20230419105549.png|300]]
 ## Pt. 2 Schedule
 
-- [ ] Separazione del training set in 3: Training, Validation e Test
-- [ ] Training dei vari modelli
-- [ ] Confrontiamo con i risultati del paper dei cinesi (Random Forest)
+- [x] Separazione del training set in 3: Training, Validation e Test
+- [x] Training dei vari modelli
+- [x] Confrontiamo con i risultati del paper dei cinesi (Random Forest)
 - [ ] FESTEGGIARE ! ✨🍾🎉
 
 
 > [!Warning] Dubbi:
 >  - Poincarè / Lorenz plot
-> 	 - ![[Pasted image 20230419110839.png|800]]
->  - 
->  - 
-> 
+> 	 - SONO DIVERSI ED è SPIEGATO QUI https://www.politesi.polimi.it/bitstream/10589/11597/1/2010_12_Zanini.pdf
 
 
 # Bibliography
