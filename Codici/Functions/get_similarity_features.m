@@ -41,7 +41,7 @@ for i = 1:length(QRS_onset)
 end
 
 % Get the ratio of high similarity beats
-QRS_similarity = get_beat_similarity(QRS_matrix);
+[QRS_similarity, QRS_similarity_matrix] = get_beat_similarity(QRS_matrix);
 
 %% R Amplitude similarity
 
@@ -57,7 +57,7 @@ for i = 1:length(R_peak)
 end
 
 % Get the ratio of high similarity beats
-R_similarity = get_beat_similarity(r_matrix);
+[R_similarity, R_similarity_matrix] = get_beat_similarity(r_matrix);
 
 %% Ratio of High Beats Similarity
 
@@ -65,8 +65,11 @@ R_similarity = get_beat_similarity(r_matrix);
 % Take both information making the product of QRS and R similarity
 %similarity_matrix = QRS_matrix .* r_matrix;
 
+joint_bin_matrix = QRS_similarity_matrix .* R_similarity_matrix;
+joint_high_similarity = sum(sum(joint_bin_matrix));
+
 % Get the ratio of high similarity beats
-Ratio_HBS = get_beat_similarity(QRS_matrix, r_matrix);
+Ratio_HBS = joint_high_similarity / ((size(joint_bin_matrix,1)^2) - size(joint_bin_matrix,1))/2;
 
 %% Signal Qualify Index
 
