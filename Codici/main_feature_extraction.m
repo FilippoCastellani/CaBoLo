@@ -7,8 +7,8 @@ clc; close all; clear;
 [PROJECT_DIRECTORY, DatasetFolderPath,DatasetFolderPrefix] = set_environment();
 
 %% Set what you want to run 
-extract_train = 0;
-extract_test = 1;
+extract_train = 1;
+extract_test = 0;
 
 %% Extract train filenames 
 if (extract_train)
@@ -49,7 +49,7 @@ fclose(fid);
 % if you want to continue a previous extraction set here the csv file were
 % to write and properly set the start of the cycle to the first
 % sample to be processed
-% filename = 'features_27-05-2023_14-58-35.csv';
+% filename = ''Data/train_features_15-06-2023_22-37-12.csv'';
 
 N = length(train_patients);
 verbose = 0;
