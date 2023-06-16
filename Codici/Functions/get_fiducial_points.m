@@ -102,7 +102,7 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
             slope_t_window = filtered_t_window;
         end 
 
-        % Define a threshold for the slope as a percetange of the mean
+        % Define a threshold for the slope as a percentage of the mean
         % slope respectively on the two sides of the 
         % wave with respect to the T peak 
         % and find the onset and the offset as the points where the slope
