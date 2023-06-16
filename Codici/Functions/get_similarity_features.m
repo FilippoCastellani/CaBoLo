@@ -62,16 +62,13 @@ end
 %% Ratio of High Beats Similarity
 
 % Compute High Beats Similarity
-% Take both information making the product of QRS and R similarity
-%similarity_matrix = QRS_matrix .* r_matrix;
-
 joint_bin_matrix = QRS_similarity_matrix .* R_similarity_matrix;
 joint_high_similarity = sum(sum(joint_bin_matrix));
 
 % Get the ratio of high similarity beats
 Ratio_HBS = joint_high_similarity / ((size(joint_bin_matrix,1)^2) - size(joint_bin_matrix,1))/2;
 
-%% Signal Qualify Index
+%% Signal Quality Index
 
 % Initialize the vector
 SQindex_vector = zeros(length(P_onset)-1, 1);
