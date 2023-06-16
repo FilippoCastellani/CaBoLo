@@ -44,14 +44,14 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
     QRS_offset = nan(1,n);
 
     for i=(1:n)     % for each identified QRS complex
-        [start_before_q, ~, before_q] = window(ecg, Q_peak(i)-wnd2, Q_peak(i)); % get ecg in the 40ms before the Q
+        [start_before_q, ~, before_q] = window(ecg, Q_peak(i)-wnd2, Q_peak(i)-4); % get ecg in the 40ms before the Q
         slope_before_q = diff(before_q); % get the slope of the segment
-        [~, min_loc_sbq] = min(slope_before_q); % find the minimum slope
+        [~, min_loc_sbq] = min(abs(slope_before_q)); % find the minimum slope
         QRS_onset(i) = relocate(min_loc_sbq, start_before_q); % store its location wrt the whole ecg
 
-        [start_after_s, ~, after_s] = window(ecg, S_peak(i), S_peak(i)+wnd2); % get ecg in the 40ms after the S
+        [start_after_s, ~, after_s] = window(ecg, S_peak(i)+4, S_peak(i)+wnd2); % get ecg in the 40ms after the S
         slope_after_s = diff(after_s); % get the slope of the segment
-        [~, min_loc_sas] = min(slope_after_s); % find the minimum slope
+        [~, min_loc_sas] = min(abs(slope_after_s)); % find the minimum slope
         QRS_offset(i) = relocate(min_loc_sas, start_after_s); % store its location wrt the whole ecg
     end 
 
