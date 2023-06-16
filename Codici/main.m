@@ -4,14 +4,32 @@
 clc;close all;clear;
 
 %% Set what you want to run 
-train_test_split = 0;
-af_distribution_extraction = 0;
-filter_design_study = 0;
+train_test_split = 1;
+af_distribution_extraction = 1;
+filter_design_study = 1;
 
 %% Setting the environment
 
+% Set environment for host
+host_path = ''; 
+
 % Set working path
-    if(getenv('COMPUTERNAME')=="FILIPPO") % se sei sul computer di filippo
+    if (~isempty(host_path)) 
+        PROJECT_DIRECTORY = host_path;
+        cd(PROJECT_DIRECTORY);
+        
+        % add WFDB toolbox to search path
+        addpath(genpath([PROJECT_DIRECTORY 'WFDB_Toolbox']));
+
+        % add functions folder to search path
+        addpath(genpath([PROJECT_DIRECTORY 'Functions']));
+        
+        % identify Dataset folder within project directory
+        DatasetFolderPrefix = 'Dataset/training2017/';
+        DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
+        disp('Environment set to hostpath');
+
+    elseif(getenv('COMPUTERNAME')=="FILIPPO") % se sei sul computer di filippo
         PROJECT_DIRECTORY = 'E:/ProgettiGithub/CaBoLo/Codici/';
         cd(PROJECT_DIRECTORY);
         
@@ -76,16 +94,13 @@ filter_design_study = 0;
         DatasetFolderPrefix = 'Dataset/training2017/';
         DatasetFolderPath = [PROJECT_DIRECTORY DatasetFolderPrefix];
 
-    %else 
-        %DatasetPath = "default"; %put your path here;
-
     end
 
 %% Dataset split 
 
 if (train_test_split)
     % Load the CSV file
-    dataset_folder = 'C:/Users/c.boscarino/OneDrive - Reply/Desktop/ChiaraBoscarino/UNI/BSPLab/CaBoLo/Codici/Dataset/training2017/';
+    dataset_folder = DatasetFolderPrefix;
     reference_filepath = dataset_folder + "REFERENCE.csv";
     data = readtable(reference_filepath','ReadVariableNames', false); 
     data.Properties.VariableNames = {'FileName', 'Label'};
@@ -128,7 +143,7 @@ end
 
 %% Loading data
 % Let's pick a patient
-SelectedPatient='A03600';
+SelectedPatient='A00003'; % A08495 
 
 SelectedPatientPath=[DatasetFolderPrefix SelectedPatient];
 
@@ -217,8 +232,3 @@ verbose=1;
 [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy] = feature_extraction(ecg_checked, Fs, time_axis, verbose);    
 feature_vector = [morphological_feature_vector, AF_feature_vector, RR_feature_vector, similarity_feature_vector, noisy];
 
-%%
-%ecgpuwave
-
-% may be usefull to check results:
-wfdbRecordViewer
