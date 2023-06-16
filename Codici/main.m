@@ -4,9 +4,9 @@
 clc;close all;clear;
 
 %% Set what you want to run 
-train_test_split = 1;
-af_distribution_extraction = 1;
-filter_design_study = 1;
+train_test_split = 0;
+af_distribution_extraction = 0;
+filter_design_study = 0;
 
 %% Setting the environment
 
