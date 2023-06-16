@@ -26,7 +26,6 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     
     X_edge= -Lorenz_X_boundary:bin_lateral_size:Lorenz_X_boundary;
     Y_edge= -Lorenz_Y_boundary:bin_lateral_size:Lorenz_Y_boundary;
-    p_hist = flip(hist3([X1' X2'],'ctrs',{X_edge Y_edge}));
 
     if visuals
         % Figure with two subplots: 
@@ -168,10 +167,10 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
         ylabel('Count')
     end
 
-    % Now lets compute the bin edges (now that we have removed the outliers)
+    % Compute the bin edges (now that we have removed the outliers)
     bin_edges = linspace(min(rr_series_no_outliers), max(rr_series_no_outliers), num_bins+1);
 
-    % once again we need to count how many points are in each bin
+    % Count how many points are in each bin
     [counts, ~] = histcounts(rr_series_no_outliers, bin_edges);
 
     % compute the probability distribution
@@ -192,9 +191,6 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     % this is justified by the fact that the probability distribution where 
     % equal to zero is muliplying the log(0) and thus the contribution is 
     % zero in any case.
-    % If we had more samples we would have had no empty bins but at the same 
-    % time very low value for probability and this would have "fixed" the
-    % issue.
 
     % Apply the definition of Shannon Entropy
     ShannonEntropy = -sum(non_zero_prob_distribution.*log(non_zero_prob_distribution));
