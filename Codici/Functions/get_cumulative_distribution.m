@@ -1,4 +1,4 @@
-function [RR_RR_cumulative_distribution,RR_RR_values] = get_cumulative_distribution(patient_name, dataset_folder);
+function [RR_RR_cumulative_distribution,RR_RR_values] = get_cumulative_distribution(patient_name, dataset_folder)
         % This function computes the cumulative distribution of the RR(i)/RR(i-1) values
         % of a given patient
 
