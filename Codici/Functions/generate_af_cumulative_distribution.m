@@ -29,17 +29,15 @@ function generate_af_cumulative_distribution(dataset_folder, patient_limiter, vi
     % close the file
     fclose(fid);
 
-    % get the list of the AF patients denoted with 'A'
+    % get the list of labels
     labels = reference{2};
-    % get the list of the patients
+    % get the list patient ids
     patients_names = reference{1};
     
     % get the indices of the AF patients
     af_indices = strcmp(labels, 'A');
     % get the names of the AF patients
     af_patients_names = patients_names(af_indices);
-
-    % get the number of patients
 
     % if the patient_limiter is set to -1, consider all patients
     num_patients = length(af_patients_names);
