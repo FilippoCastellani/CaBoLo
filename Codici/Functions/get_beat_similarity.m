@@ -2,16 +2,6 @@ function [similarity_ratio,bin_matrix]  = get_beat_similarity(matrix1)
     
     % Compute correlation coefficients along the matrix
     similarity_matrix = corrcoef(matrix1');
-    
-    % % If two matrices are given, it means that we need to compute
-    % % the joint similarity of QRS and R amplitude
-    % % therefore, before analyzing the matrix, we make the product
-    % if nargin == 2
-    %     similarity_matrix2 = corrcoef(matrix2');
-    %     similarity_matrix = similarity_matrix1 .* similarity_matrix2;
-    % else
-    %     similarity_matrix = similarity_matrix1;
-    % end
 
     % Take only the upper right part
     triangular_matrix = triu(similarity_matrix, 1);
