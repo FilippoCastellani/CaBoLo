@@ -7,7 +7,7 @@ function [QRS_similarity, R_similarity, Ratio_HBS, SQindex] = get_similarity_fea
 % [X] - Similarity index of QRS (QRS_similarity)
 % [X] - Similarity index of R amplitude (R_similarity)
 % [X] - Ratio of high similarity beats (Ratio_HBS)
-% [X] - Signal Qualify index (SQindex)
+% [X] - Signal Quality index (SQindex)
 
 % INPUT
 
@@ -73,14 +73,14 @@ Ratio_HBS = joint_high_similarity / ((size(joint_bin_matrix,1)^2) - size(joint_b
 % Initialize the vector
 SQindex_vector = zeros(length(P_onset)-1, 1);
 
-% Signal Qualify of each beat computed as the difference between the
+% Signal Quality of each beat computed as the difference between the
 % current P-wave onset amplitude and the previous T-wave offset amplitude
 
 for i = 2:(length(P_onset)-1)
     SQindex_vector(i) = ecg(P_onset(i))-ecg(T_offset(i-1));
 end
 
-% Signal Qualify Index of the whole recording as the 
+% Signal Quality Index of the whole recording as the 
 % standard deviation of the SQindex of each beat
 SQindex = std(SQindex_vector);
 

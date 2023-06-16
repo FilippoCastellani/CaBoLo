@@ -67,7 +67,8 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
         % which we expect to find the T wave as the 2/3 of the distance between the
         % offset of the QRS complex in the same beat and the onset of the following one
 
-        % this control allows keep forward the previous window in the last cycle 
+        % this control allows keep forward the previous window in the last cycle
+        % to handle the absence of the following QRS onset after the last beat
         if (i<n) 
             t_window_length = round((2/3)*(QRS_onset(i+1)-QRS_offset(i))); 
         end
@@ -165,7 +166,7 @@ function [P_peak, P_onset, P_offset, T_peak, T_onset, T_offset, Q_peak, S_peak, 
             filtered_p_window = p_window;
         end
         
-        % check to have at least to values to compute the slope
+        % check to have at least two values to compute the slope
         if length(filtered_p_window)>2
             slope_p_window = diff(filtered_p_window); 
         else

@@ -37,21 +37,24 @@ function [OriginCount,IrrEv,PACEv,AnisotropyEv,DensityEv,RegularityEv] = get_AFE
 % dRR={dRR(i),dRR(i-1)}
 dRR=[dRR(2:length(dRR),1) dRR(1:length(dRR)-1,1)];
 % COMPUTE OriginCount
+% Count points falling inside the range of +/-20 ms (half bin size)
 OCmask=0.02;
-os=sum(abs(dRR)<=OCmask,2);
-OriginCount=sum(os==2);
+origin_sum=sum(abs(dRR)<=OCmask,2);
+OriginCount=sum(origin_sum==2);
 
 % DELETE OUTLIERS |dRR|>=1.5
-OLmask=1.5;
+% Create a new vector of dRR elements discarding those exceeding maximum
+% boundaries on at least one axis
+outlier_mask=1.5;
 dRRnew=[];
 j=1;
 for i=1:size(dRR,1)
-    if sum(abs(dRR(i,:))>=OLmask)==0
+    if sum(abs(dRR(i,:))>=outlier_mask)==0
         dRRnew(j,:)=dRR(i,:);
         j=j+1;
     end
 end
-if size(dRRnew)==0
+if size(dRRnew)==0 % if this is empty, put one element in the origin 
     dRRnew = [0 0];
 end
 
@@ -86,6 +89,8 @@ Nend = N_length;
 Z(N0,N1:N2)=0;
 Z(N1:N2,N0:N3)=0;
 Z(N3,N1:N2)=0;
+
+% Display what happens after clearing the origin bins
 
 [X,Y]=meshgrid(XYedges(1:end-1), XYedges(1:end-1));
 surf(X,Y, Z);

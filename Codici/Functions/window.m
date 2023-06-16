@@ -1,4 +1,7 @@
 function [start, stop, windowed_signal]= window(signal, start, stop)
+% This function windows the signal with the desired start and stop handling
+% potential exceeding of indexes
+
     if stop < start
         start = start-1;
         stop = start+1;

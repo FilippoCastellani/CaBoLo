@@ -8,7 +8,7 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     %
     
     %% AFEv
-    AFEv=0;
+    
     % In order to calculate the AFEv, the following steps are taken:
     % Create RR intervals from the R-peak locations
     rr_series = (diff(Rpeak_index))*(1/fs)*1000;               % in ms
@@ -140,9 +140,7 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     % To obtain a reasonably accurate measure of the SE, at least 16 such bins are required.
     
     % 2. The probability distribution is computed for each bin as the number of beats in that 
-    % bin divided by the total number of beats in the segment (after removing outliers),
-
-    ShannonEntropy=0;
+    % bin divided by the total number of beats in the segment (after removing outliers)
 
     % To obtain a reasonably accurate measure of the SE, at least 16 such bins are required. 
     num_bins = 16;
@@ -201,8 +199,6 @@ function [AFEv, Radius, ShannonEntropy, KSTestValue] = get_AF_features(ecg, fs, 
     % Therefore, a high value of prob of a test RRr distribution and the 
     % standard AF distribution is associated with a positive identification
     % of AF.
-    
-    KSTestValue=0;
     
     % perform the Kolmogorov Smirnov test with respect to the the fitted distribution
     

@@ -91,7 +91,7 @@ function generate_af_cumulative_distribution(dataset_folder, patient_limiter, vi
     xdata= AF_values_all';
     ydata= AF_cumulative_distributions_all';
     
-    % Define the function to be fitted
+    % Define the general Logistic Function to be fitted
     fun = @(p,xdata) p(1) ./ ( 1 + exp(-1*p(2)*(xdata-p(3))) );
     % Define the initial parameters (initial guess)
     p0 = [1, 1, 0.5];
