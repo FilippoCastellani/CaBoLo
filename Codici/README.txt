@@ -12,7 +12,7 @@ This folder contains all the scripts produced for the development of the project
 To run through all the steps required for data preparation, preliminary analysis, and feature extraction for a single recording you can use the script 'main.m'. It will only be necessary to set the right environment by defining the already present variable 'host_path' with the path of this folder.
 To then define which parts of the code to run, set the flags at the beginning of the script:
 - train_test_split = 1; % Performs the split of the CSV file to create training and test set.
-- af_distribution_extraction= 1; % computes the cumulative distribution for a set of 10 AF patients, needed as standard for one of the features. When the splitting criteria will be met, and the distribution is created, the code will notify and the process stopped.
+- af_distribution_extraction= 1; % computes the cumulative distribution for a set of 9 AF patients, needed as standard for one of the features. When the splitting criteria will be met, and the distribution is created, the code will notify and the process stopped.
 - filter_design_study = 1; % Performs the filter design study, comparing and visualizing different filter orders performances.
 To actually test the preprocessing and feature extraction phase on a specific patient first set in the section 'Loading data' the 'SelectedPatient' variable to the patient id, then run the sections below. 
 
