@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md"
+                "file": "NotePersonaliFilippo/Features/Shannon Entropy.md"
               }
             }
           }
@@ -156,12 +156,14 @@
   },
   "active": "8d33459a59dfa3c1",
   "lastOpenFiles": [
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230615153143.png",
+    "README.md",
+    "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
     "Codici/Images/Confusion_matrix_300_weak_learners.jpg",
     "Codici/Images/Accuracy_for_each_of_k_fold.jpg",
     "NotePersonaliFilippo/Features/AFEv.md",
     "Codici/Images/NormalSynusActivity_LorenzPlot.png",
     "Codici/Images/AtrialFibrillationActivity_LorenzPlot.png",
-    "README.md",
     "NotePersonaliFilippo/Features/Random Forests.md",
     "Codici/main_classification_reloaded.asv",
     "Codici/main_classification_reloaded.m",
@@ -178,14 +180,12 @@
     "NotePersonaliFilippo/Features/Shannon Entropy.md",
     "NotePersonaliFilippo/Features/Similarity Indexes Between Beats.md",
     "doubts.md",
-    "NotePersonaliFilippo/Features/Kolmogorov-Smirnov Test Value.md",
     "ECGPUWAVE Note.md",
     "Grafici per capire i fiducial point.jpeg",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230501165733.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420185519.png",
     "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420181933.png",
     "NotePersonaliFilippo/2017 PhysioNet CinC Challenge.md",
-    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162620.png",
-    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162754.png"
+    "NotePersonaliFilippo/BSP ATTACHMENTS/Pasted image 20230420162620.png"
   ]
 }

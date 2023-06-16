@@ -34,6 +34,10 @@ The eight longest and eight shortest RR values in the segment are considered out
 > [!important]  
 > In this article they use 16 for $N_{bins}$ and use 8 as $N_{outlier}$
 
+## Efficiency (normalized entropy)[[edit](https://en.wikipedia.org/w/index.php?title=Entropy_(information_theory)&action=edit&section=17 "Edit section: Efficiency (normalized entropy)")]
+
+A source alphabet with non-uniform distribution will have less entropy than if those symbols had uniform distribution (i.e. the "optimized alphabet"). This deficiency in entropy can be expressed as a ratio called efficiency
+![[Pasted image 20230615153143.png]]
 # Source
 https://link.springer.com/article/10.1007/s10439-009-9740-z
 ![[Automatic Real Time Detection of Atrial Fibrillation.pdf]]
