@@ -23,7 +23,8 @@ Set the environment as before, and then define the extraction desired from the f
 Then run the sections below.
 
 In the folder 'Functions' you will find all the functions needed to preprocess the signals and extract the feature.
-- 'get_cumulative_distribution.m' = computes the standard cumulative distribution for AF patient, used in the 'main.m';
+- 'generate_af_cumulative_distribution.m' = computes the standard cumulative distribution for AF patient, uses:
+	- 'get_cumulative_distribution.m';
 - 'preprocessing.m' = computes the preprocessing on the signal.
 	- 'correct_if_inverted.m';
 - 'pan_tompkin.m' = returns amplitudes and indexes of R peaks in the record.
