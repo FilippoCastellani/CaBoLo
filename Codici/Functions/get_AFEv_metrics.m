@@ -75,18 +75,12 @@ if debug>0
     grid on;
 end
 
-N_length = length(N)-1; % NEED TO TAKE CARE OF THIS ISSSSSUEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+N_length = length(N)-1; 
 N1 = N_length/2;
 N0 = N1-1;
 N2 = N1+1;
 N3 = N1+2;
 Nend = N_length;
-
-% COMPUTE POINT COUNT ZERO
-%O1=sum(sum(Z(14,15:16)));
-%O2=sum(sum(Z(15:16,14:17)));
-%O3=sum(sum(Z(17,15:16)));
-%PC0=O1+O2+O3;
 
 % Clear SegmentZero
 Z(N0,N1:N2)=0;
