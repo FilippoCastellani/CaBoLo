@@ -162,10 +162,7 @@ X_TEST.patient_id = [];
 DEBUGGING = 0;
 visuals= 1;
 
-%%
-
 if DEBUGGING
-    clc;
     k = 8;
     weak_learners_values = [10 20 50 100];
 else
