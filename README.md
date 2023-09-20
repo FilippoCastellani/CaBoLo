@@ -7,9 +7,27 @@ This is a project concerning the use of [[Machine Learning]] in the context of A
 Our purpose is to reproduce the results obtained by a group of researchers from the Beijing University of Technology.
 The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
 
-![[2017 PhysioNet CinC Challenge#Main aspects]]
+### Main aspects
+The 2017 PhysioNet/CinC Challenge aims to encourage the development of algorithms to classify, from a single short ECG lead recording (between 30 s and 60 s in length),
+whether the recording shows
 
-![[2017 PhysioNet CinC Challenge#Challenge Data]]
+normal sinus rhythm,
+atrial fibrillation (AF),
+an alternative rhythm,
+or is too noisy to be classified.
+
+#### Challenge Data
+ECG recordings, collected using the AliveCor device.
+The training set contains
+
+8,528 single lead ECG recordings lasting from 9 s to just over 60 s
+*- test set contains 3,658 ECG recordings of similar lengths
+The test set is unavailable to the public and will remain private for the purpose of scoring for the duration of the Challenge and for some period afterwards.
+
+ECG recordings were sampled as 300 Hz and they have been band pass filtered by the AliveCor device.
+
+All data are provided in MATLAB V4 WFDB-compliant format (each including a .mat file containing the ECG and a .hea file containing the waveform information).
+
 # Our work
 
 ## Pt.1 Schedule
