@@ -17,7 +17,7 @@ Our purpose is to reproduce the results obtained by a group of researchers from 
 The aforementioned team participated in the 2017 PhysioNet CinC Challenge.
 
 ### Main References
-- [Detection of AF using Decision Tree Ensamble (F. Castellani, C. Boscarino, A. Lombardi from Politecnico di Milano)](Boscarino_Castellani_Lombardi_ProjectBSPLab\Report_BSP_Lab_Assignment.pdf)
+- [Detection of AF using Decision Tree Ensamble (F. Castellani, C. Boscarino, A. Lombardi from Politecnico di Milano)](Report_BSP_Lab_Assignment.pdf)
 - [Reference paper (Shao et al. from Beijing University of Technology)](https://pubmed.ncbi.nlm.nih.gov/30187894/)
 - [2017 PhysioNet CinC Challenge](https://physionet.org/content/challenge-2017/1.0.0/)
 
@@ -46,7 +46,7 @@ All data are provided in MATLAB V4 WFDB-compliant format (each including a .mat 
  4. You may have to install some additional packages, like the Signal Processing Toolbox, the Statistics and Machine Learning Toolbox. There is no need to re-install the WFDB Toolbox as it is already included in the repository, however you may need to add it to the MATLAB search path. 
 
 ## How to use it?
-[User instructions](Boscarino_Castellani_Lombardi_ProjectBSPLab\README.txt) 
+[User instructions](Codici/README.txt)
 
 # Authors
 Filippo Castellani
@@ -62,5 +62,5 @@ Antonella Lombardi
     <b> Ca. Bo. Lo.</b></p>
 
 <p align="right">
-    <a href="https://github.com/FilippoCastellani/CaBoLo/blob/main/Boscarino_Castellani_Lombardi_ProjectBSPLab/Report_BSP_Lab_Assignment.pdf"><b>Go to report</b>
+    <a href="https://github.com/FilippoCastellani/CaBoLo/blob/main/Report_BSP_Lab_Assignment.pdf"><b>Go to report</b>
 </p>
