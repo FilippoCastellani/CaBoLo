@@ -23,7 +23,7 @@ whether the recording shows
 - an alternative rhythm,
 - or is too noisy to be classified.
 
-#### Challenge Data
+### Challenge Data
 ECG recordings, collected using the AliveCor device.
 The training set contains 8,528 single lead ECG recordings lasting from 9 s to 60 s. 
 The test set contains 3,658 ECG recordings of similar length. 
@@ -33,7 +33,7 @@ ECG recordings were sampled as 300 Hz and band pass filtered by the AliveCor dev
 All data are provided in MATLAB V4 WFDB-compliant format (each including a .mat file containing the ECG and a .hea file containing the waveform information).
 
 
-# Authors
+## Authors
 Filippo Castellani
 Chiara Boscarino
 Antonella Lombardi
