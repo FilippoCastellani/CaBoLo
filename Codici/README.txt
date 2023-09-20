@@ -1,10 +1,4 @@
-BIOMEDICAL SIGNAL PROCESSING LABORATORY − 2022/23
-Detection of Atrial Fibrillation using Decision Tree Ensemble
-
-Authors: 
-- Chiara Boscarino - 10648163 
-- Filippo Castellani - 10784227 
-- Antonella Lombardi - 10618195
+DETECTION OF ATRIAL FIBRILLATION USING DECISION TREE ENSEMBLE
 
 Instructions:
 This folder contains all the scripts produced for the development of the project. 

@@ -10,7 +10,7 @@ Our purpose is to reproduce the results obtained by a group of researchers from 
 The aforementioned team participated in the 2017 PhysioNet CinC Challenge.
 
 ### Main References
-- [Detection of AF using Decision Tree Ensamble (F. Castellani, C. Boscarino, A. Lombardi)]()
+- [Detection of AF using Decision Tree Ensamble (F. Castellani, C. Boscarino, A. Lombardi from Politecnico di Milano)]()
 - [Reference paper (Shao et al. from Beijing University of Technology)](https://pubmed.ncbi.nlm.nih.gov/30187894/)
 - [2017 PhysioNet CinC Challenge](https://physionet.org/content/challenge-2017/1.0.0/)
 
@@ -32,6 +32,8 @@ ECG recordings were sampled as 300 Hz and band pass filtered by the AliveCor dev
 
 All data are provided in MATLAB V4 WFDB-compliant format (each including a .mat file containing the ECG and a .hea file containing the waveform information).
 
+# How to use it?
+[User instructions](C:\Users\chiar\OneDrive\Documenti\GitHub\CaBoLo\Codici\README.txt)
 
 ## Authors
 Filippo Castellani
