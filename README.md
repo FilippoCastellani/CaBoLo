@@ -39,24 +39,21 @@ ECG recordings were sampled as 300 Hz and band pass filtered by the AliveCor dev
 
 All data are provided in MATLAB V4 WFDB-compliant format (each including a .mat file containing the ECG and a .hea file containing the waveform information).
 
-# How to use it?
-[User instructions](Boscarino_Castellani_Lombardi_ProjectBSPLab\README.txt) 
-
-## Authors
-Filippo Castellani
-Chiara Boscarino
-Antonella Lombardi
-
-
 # Installation
-
  1. Clone the repository `git clone https://github.com/FilippoCastellani/CaBoLo `
  2. Verify your MATLAB version is >= 2021 as this was the version used to develop the project
  3. Open MATLAB and set the current folder to the one you just cloned
  4. You may have to install some additional packages, like the Signal Processing Toolbox, the Statistics and Machine Learning Toolbox. There is no need to re-install the WFDB Toolbox as it is already included in the repository, however you may need to add it to the MATLAB search path. 
 
- --------------
+## How to use it?
+[User instructions](Boscarino_Castellani_Lombardi_ProjectBSPLab\README.txt) 
 
+# Authors
+Filippo Castellani
+Chiara Boscarino
+Antonella Lombardi
+
+ --------------
 
 
 <!-- Footer -->
