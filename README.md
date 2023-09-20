@@ -1,11 +1,13 @@
 #Project 
 
 # What is it ?
-This is a project concerning the use of [[Machine Learning]] in the context of Atrial Fibrillation detection.
+This is a project concerning the use of Machine Learning in the context of Atrial Fibrillation (AF) detection. 
+It covers the process performed to properly preprocess raw ECG signals, extract pertinent AF-related features, and leverage 
+these features using Machine Learning models to discern whether the ECG recording shows Normal Sinus Rhythm or Atrial Fibrillation.
 
 ## The purpose 
 Our purpose is to reproduce the results obtained by a group of researchers from the Beijing University of Technology.
-The aformentioned team partecipated to the [[2017 PhysioNet CinC Challenge]]
+The aforementioned team participated in the 2017 PhysioNet CinC Challenge.
 
 ### Main aspects
 The 2017 PhysioNet/CinC Challenge aims to encourage the development of algorithms to classify, from a single short ECG lead recording (between 30 s and 60 s in length),
@@ -24,101 +26,14 @@ The training set contains
 *- test set contains 3,658 ECG recordings of similar lengths
 The test set is unavailable to the public and will remain private for the purpose of scoring for the duration of the Challenge and for some period afterwards.
 
-ECG recordings were sampled as 300 Hz and they have been band pass filtered by the AliveCor device.
+ECG recordings were sampled as 300 Hz. They have been band pass filtered by the AliveCor device.
 
 All data are provided in MATLAB V4 WFDB-compliant format (each including a .mat file containing the ECG and a .hea file containing the waveform information).
 
-# Our work
+### Main Reference
+[Detection of Atrial Fibrillation using Decision Tree Ensamble](https://pubmed.ncbi.nlm.nih.gov/30187894/)
 
-## Pt.1 Schedule
-
- - [ ] Comprehension of features definition and meaning
-	 - [ ] Creation of a small word file with all the theory concerning the features and computation method of each of them
- - [x] Dowload the dataset ( `training2017.zip` )
-	 - [ ] Capire come sono indicizzati i pazienti e quali sono le informazioni presenti per ognuno
-	 - [x] Data exploration è stata già fatta da physionet quando ha pubblicato la challenge (vedi sopra Challenge Data)
- - [ ] Definizione di una pipeline di processing che sia ad hoc per ogni paziente
-	 - [ ] Pre-processing:
-		 - [x] Check for possible direction inversion of recording 
-		 - [ ] Electronic noise filtering
-			 - [x] Noise was removed by low-pass filtering @ 50 Hz
-			 - [ ] Ma a che frequenza era davvero il noise ?
-		 - [ ] Removal of pneumonic induced noise and muscular activity
-			 - [ ] Ipotesi: probabilmente si tratta della baseline correction (fatta con movmean)
-		 - [ ] Filtering in physiological band
-			 - [x] Abbiamo deciso (2-50 Hz)
-				 - [ ] Ma quale reference citiamo che ha fatto la stessa cosa ?
-				 - [x] Stiamo tranquilli per la muscular noise e anche per il power line noise
-				 - [x] Perche Butterworh e di che ordine ? 
-				 - [x] Ce ne freghiamo della fase non lineare e facciamo filt filt !
-		 - [x] Baseline Correction (*movmean removal*)
-			 - [x] Ipoteticamente potrebbe già essere compresa nello step di Band-Passing (CONFERMATO)
-	 - [ ] Feature Extraction
-		 - [ ] Morphological Feature ( * ) = implented on [[ECGPUWAVE Note]]
-			 - [x] Per adesso le estraiamo così però poi capiamo se farlo a mano oppure andare verso l'altra direzione ovvero mettere anche quelle di osealib (CHIEDI A MAINARDI)
-			 - [ ] ![QRS1|300](https://upload.wikimedia.org/wikipedia/commons/9/9e/SinusRhythmLabels.svg)
-			 - [ ] ( * ) QRS Duration (Q Onset -> S Offset) 
-				 - [ ] "*QRS duration is measured from the beginning of the Q wave to the end of the S wave. A normal range is from 40 to 100 milliseconds*"
-					 - [ ] Source https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3584304/
-				 - [ ] "*Since the maximum duration of the QRS regions can be 150ms-160ms*"
-					 - [ ] Source Detection of ECG Characteristic Features Using Slope Thresholding and Relative Magnitude Comparison https://ieeexplore.ieee.org/abstract/document/6407876/
-			 - [ ] PR Interval (P onset -> QRS Onset)
-			 - [ ] QT Interval (QRS onset  -> T offset)
-			 - [ ] QS Interval ( Q peak -> S peak)
-			 - [ ] ST Interval ( Q onset -> T offset)
-			 - [ ] ( * ) P Amplitude
-			 - [ ] ( * ) Q Amplitude
-			 - [ ] R Amplitude
-			 - [ ] S Amplitude
-			 - [ ] T Amplitude
-				 - [ ] DOUBT: ma per ognuna di queste forse dovremmo calcolare media e varianza/standard deviation ?
-				 - [ ] ![QRS|400](https://litfl.com/wp-content/uploads/2018/10/ECG-waves-segments-and-intervals-LITFL-ECG-library-3.jpg.webp)
-		 - [ ] AF Features
-			 - [ ] [[AFEv]] 
-				 - [x] DOUBT: ma nel nostro caso come facciamo ad identificare il raggio del bin centrale ?
-			 - [x] Radius [[AFEv#Radius sub-feature]]
-			 - [x] [[Shannon Entropy]] 
-				 - [ ] Doubt: vedi nota
-			 - [ ] [[Kolmogorov-Smirnov Test Value]]
-				 - [ ] Doubt: vedi nota
-		 - [ ] RR intervals Features
-			 - [ ] Median RR Interval
-			 - [ ] [[Index for Arrhythmia]]
-				 - [ ] DOUBT: vedi all'interno della nota
-		 - [ ] [[Similarity Indexes Between Beats|Similarity index between beats Features]]
-			 - [ ] [[Similarity Indexes Between Beats#Similarity index of QRS (F40)|Similarity index of QRS]]
-				 - [ ] DOUBT: vedi all'interno della nota
-			 - [ ] [[Similarity Indexes Between Beats#Similarity index of R amplitude (F41)|Similarity index of R amplitude]]
-				 - [ ] DOUBT: vedi all'interno della nota
-			 - [ ] [[Similarity Indexes Between Beats#Ratio of high similarity beats (F42)|Ratio of high similarity beats]]
-				 - [ ] DOUBT: vedi all'interno della nota
-			 - [ ] [[Similarity Indexes Between Beats#Signal Qualify index (F43)|Signal Qualify index]]
-				 - [ ] DOUBT: vedi all'interno della nota
- - [x] Costruzione di una funzione che estragga i valori del paziente sulla base del suo "Nome"
- - [x] Realizzazione della funzione che mette in pratica la pipeline
- - [x] Costituzione di una matrice che divenga il dataset per il training del modello
-
-![[Pasted image 20230419094805.png|300]] ![[Pasted image 20230419105549.png|300]]
-## Pt. 2 Schedule
-
-- [x] Separazione del training set in 3: Training, Validation e Test
-- [x] Training dei vari modelli
-- [x] Confrontiamo con i risultati del paper dei cinesi (Random Forest)
-- [ ] FESTEGGIARE ! ✨🍾🎉
-
-
-> [!Warning] Dubbi:
->  - Poincarè / Lorenz plot
-> 	 - SONO DIVERSI ED è SPIEGATO QUI https://www.politesi.polimi.it/bitstream/10589/11597/1/2010_12_Zanini.pdf
-
-
-# Bibliography
-
-![[Detection of Atrial Fibrillation using Decision Tree Ensamble.pdf]]
-# Context
-
-
-### Who is working on it ?
-[[Filippo Castellani]]
-[[Chiara Boscarino]]
-[[Antonella Lombardi]]
+# Authors
+Filippo Castellani
+Chiara Boscarino
+Antonella Lombardi
