@@ -1,4 +1,11 @@
-#Project 
+<!-- Header -->
+
+<p align="center">
+    <img src="media/Logo_Politecnico_Milano.png" alt="Polimi logo" width="30%" height="30%">
+</p>
+
+
+--------------
 
 # What is it ?
 This is a project concerning the use of Machine Learning in the context of Atrial Fibrillation (AF) detection. 
@@ -39,3 +46,24 @@ All data are provided in MATLAB V4 WFDB-compliant format (each including a .mat 
 Filippo Castellani
 Chiara Boscarino
 Antonella Lombardi
+
+
+# Installation
+
+ 1. Clone the repository `git clone https://github.com/FilippoCastellani/CaBoLo `
+ 2. Verify your MATLAB version is >= 2021 as this was the version used to develop the project
+ 3. Open MATLAB and set the current folder to the one you just cloned
+ 4. You may have to install some additional packages, like the Signal Processing Toolbox, the Statistics and Machine Learning Toolbox. There is no need to re-install the WFDB Toolbox as it is already included in the repository, however you may need to add it to the MATLAB search path. 
+
+ --------------
+
+
+
+<!-- Footer -->
+
+<p align="center">
+    <b> Ca. Bo. Lo.</b></p>
+
+<p align="right">
+    <a href="https://github.com/FilippoCastellani/CaBoLo/blob/main/Boscarino_Castellani_Lombardi_ProjectBSPLab/Report_BSP_Lab_Assignment.pdf"><b>Go to report</b>
+</p>
