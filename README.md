@@ -12,9 +12,9 @@ This is a project concerning the use of Machine Learning in the context of Atria
 It covers the process performed to properly preprocess raw ECG signals, extract pertinent AF-related features, and leverage 
 these features using Machine Learning models to discern whether an ECG recording shows Normal Sinus Rhythm or Atrial Fibrillation.
 
-# The purpose 
-Our purpose is to reproduce the results obtained by a group of researchers from the Beijing University of Technology.
-which participated in the 2017 PhysioNet CinC Challenge.
+### The purpose 
+Our purpose is to reproduce the results obtained by a group of researchers from the Beijing University of Technology, 
+who took part in the 2017 PhysioNet CinC Challenge.
 
 ### Main References
 - [Detection of AF using Decision Tree Ensamble (F. Castellani, C. Boscarino, A. Lombardi from Politecnico di Milano)](Report_BSP_Lab_Assignment.pdf)
@@ -24,7 +24,6 @@ which participated in the 2017 PhysioNet CinC Challenge.
 ### Main aspects
 The 2017 PhysioNet/CinC Challenge aims to encourage the development of algorithms to classify 
 a short single lead ECG recording (between 30 s and 60 s in length) into one of the following categories:
-
 - normal sinus rhythm,
 - atrial fibrillation (AF),
 - alternative rhythm,
